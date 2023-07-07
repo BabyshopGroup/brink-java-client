@@ -13,15 +13,6 @@ Feel free to contribute to this project!
 1. [Include the artifact in you project](#Dependency)
 2. [Initialize Client](#Initialize-Client)
 3. [API Documentation and Examples](#API-Documentation)
-4. [Product Parent](#Product-Parent)
-5. [Product Variant](#Product-Variant)
-5. [Price](#Price)
-6. [Stock](#Stock)
-7. [Store](#Store)
-8. [Tax](#Tax)
-9. [Discount](#Discount)
-10. [Error handling](#Error-handling)
-12. [To Do](#To-Do)
 
 ## Dependency
 
