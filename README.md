@@ -16,11 +16,10 @@ Feel free to contribute to this project!
 
 ## Dependency
 
-This Java Client is available on Maven Central Repository, which means to can import the SDK as an artifact.
 
 ### Maven
 
-Add the following to your `pom.xml`:
+Run `$ mvn install` and add the following to your `pom.xml`:
 
 Dependency:
 
