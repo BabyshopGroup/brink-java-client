@@ -5,9 +5,6 @@ HTTP API and uses `java.net.http` for communication, no additional logic has
 been added to the API. **Java 17 is required**. The official documentation can be
 found [here](https://docs.brinkcommerce.com).
 
-Feel free to contribute to this project!
-
-
 ## Content
 
 1. [Include the artifact in you project](#Dependency)
