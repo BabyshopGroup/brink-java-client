@@ -18,8 +18,6 @@ found [here](https://docs.brinkcommerce.com).
 
 Run `$ mvn install` and add the following to your `pom.xml`:
 
-Dependency:
-
 ```xml
 
 <dependency>
