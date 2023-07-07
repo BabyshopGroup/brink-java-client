@@ -1,4 +1,4 @@
-# Brink Commerce Java Client Library
+# Brink Commerce Java Client
 
 An unofficial open-source Java client for [Brink Commerce](https://brinkcommerce.com). The client mirrors the
 HTTP API and uses `java.net.http` for communication, no additional logic has
