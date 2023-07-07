@@ -104,11 +104,7 @@ BrinkCommerce
     └── Stock
 ```
 
-
-
-
-![Brink Classes](docs/brink_uml.svg)
-
+<img src="docs/brink_uml.svg" alt="Image" width="50%">
 
 ### Product Parent
 
