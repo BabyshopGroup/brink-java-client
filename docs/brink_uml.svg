@@ -1,0 +1,934 @@
+<svg version="1.1" baseProfile="full" width="674.5" height="1859.0" viewbox="0 0 674.4765625 1859"
+	xmlns="http://www.w3.org/2000/svg"
+>
+	<desc>[Store Group | id | name | description | created | updated]
+
+		[Store Market | languagesCodes | name | storeGroupId | isTaxIncludedInPrice
+		| countryCode | isArchived | created | description | currencyCode | updated ]
+
+		[Tax Group | name | description | created | updated]
+		[Tax Market | taxGroupId | countryCode | taxPercentage | taxPercentageDecimals]
+
+
+		[Product Parent | id | name | isArchived | displayNames | description |
+		displayDescriptions | isActive | imageUrl | updated | created | slug
+		| customAttributes | tags]
+
+		[Product Variant | id | name | taxGroupId | isArchived | displayNames | description |
+		displayDescriptions | isActive | imageUrl | updated | created | slug | productParentId |
+		customAttributes | tags]
+
+		[Addon | id | name | taxGroupId | isArchived | displayNames | description |
+		displayDescriptions | isActive | imageUrl | updated | created |
+		customAttributes | tags]
+
+		[Price Variant | basePriceAmount | salePriceAmount | CountryCode
+		| variantId | storeGroupId]
+
+		[Price Addon | basePriceAmount | salePriceAmount | CountryCode
+		| addonId | storeGroupId]
+
+		[Product Parent]1 -&gt; *[Product Variant]
+		[Product Parent]* -&gt; *[Addon]
+		[Product Variant]* -&gt; *[Tax Group]
+		[Store Group]1 -&gt; *[Store Market]
+		[Tax Group]1 -&gt; *[Tax Market]
+		[Product Variant]* -&gt; *[Store Market]
+		[Product Variant]* -&gt; *[Store Group]
+		[Product Variant]1 -&gt; *[Price Variant]
+		[Addon]1 -&gt; *[Price Addon]
+		[Addon]1 -&gt; *[Tax Group]
+		[Price Variant]* -&gt; 1[Store Market]
+		[Price Variant]* -&gt; 1[Store Group]
+		[Price Addon]* -&gt; 1[Store Group]
+		[Price Addon]* -&gt; 1[Store Market]
+
+
+	</desc>
+	<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt"
+		font-family="Helvetica" font-weight="normal" font-style="normal">
+		<g transform="translate(0.5, 0.5)" font-family="Helvetica" font-size="12pt" font-weight="bold"
+			font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round"
+			stroke="#FFFFFF">
+			<g stroke="transparent" fill="transparent">
+				<rect x="0.0" y="0.0" height="1859.0" width="674.5" stroke="none"></rect>
+			</g>
+			<g transform="translate(8, 8)" fill="#33322E">
+				<g transform="translate(20, 20)" fill="#FFFFFF" font-family="Helvetica" font-size="12pt"
+					font-weight="normal" font-style="normal">
+					<text x="364.1" y="372.4" stroke="none">1</text>
+					<text x="446.8" y="466.0" stroke="none">*</text>
+					<path d="M381.0 352.4 L438.75 454 L438.75 467.3333333333333 L438.8 467.3 "
+						fill="none"></path>
+					<path d="M433.4 460.7 L438.8 467.3 L444.1 460.7 L438.8 474.0 Z"></path>
+					<text x="235.0" y="324.7" stroke="none">*</text>
+					<text x="81.8" y="497.0" stroke="none">*</text>
+					<path d="M227.0 304.7 L96 454 L96 498.3333333333333 L96.0 498.3 " fill="none"></path>
+					<path d="M90.7 491.7 L96.0 498.3 L101.3 491.7 L96.0 505.0 Z"></path>
+					<text x="369.8" y="812.1" stroke="none">*</text>
+					<text x="80.8" y="1039.7" stroke="none">*</text>
+					<path d="M361.8 792.1 L144.5 990 L99.34229461111917 1042.6063990612736 L99.3 1042.6 "
+						fill="none"></path>
+					<path d="M99.6 1034.1 L99.3 1042.6 L107.7 1041.0 L95.0 1047.7 Z"></path>
+					<text x="557.8" y="1442.0" stroke="none">1</text>
+					<text x="499.0" y="1492.9" stroke="none">*</text>
+					<path d="M549.8 1422.0 L549.75 1442 L516.7605669350135 1495.2583643972878 L516.8 1495.3 "
+						fill="none"></path>
+					<path d="M515.7 1486.8 L516.8 1495.3 L524.8 1492.4 L513.3 1500.9 Z"></path>
+					<text x="78.1" y="1169.8" stroke="none">1</text>
+					<text x="170.3" y="1243.5" stroke="none">*</text>
+					<path d="M95.0 1149.8 L162.25 1216 L162.25 1244.8333333333333 L162.3 1244.8 "
+						fill="none"></path>
+					<path d="M156.9 1238.2 L162.3 1244.8 L167.6 1238.2 L162.3 1251.5 Z"></path>
+					<text x="395.4" y="990.0" stroke="none">*</text>
+					<text x="374.1" y="1454.0" stroke="none">*</text>
+					<path
+						d="M387.4 970.0 L383.25 990 L383.25 1103 L383.25 1103 L383.25 1216 L383.25 1216 L383.25 1329 L383.25 1329 L383.25 1442 L383.25 1442 L386.6970454347907 1455.5394258830438 L386.7 1455.5 "
+						fill="none"></path>
+					<path d="M379.9 1450.4 L386.7 1455.5 L390.2 1447.8 L388.3 1462.0 Z"></path>
+					<text x="501.5" y="857.8" stroke="none">*</text>
+					<text x="612.3" y="1229.4" stroke="none">*</text>
+					<path
+						d="M515.8 837.8 L617 990 L617 1103 L617 1103 L617 1216 L617 1216 L607.659446737255 1231.6949073411179 L607.7 1231.7 "
+						fill="none"></path>
+					<path d="M606.5 1223.2 L607.7 1231.7 L615.7 1228.7 L604.3 1237.4 Z"></path>
+					<text x="484.1" y="990.0" stroke="none">1</text>
+					<text x="514.0" y="1002.0" stroke="none">*</text>
+					<path d="M501.0 970.0 L506 990 L506 1003.3333333333334 L506.0 1003.3 " fill="none"></path>
+					<path d="M500.7 996.7 L506.0 1003.3 L511.3 996.7 L506.0 1010.0 Z"></path>
+					<text x="156.1" y="881.7" stroke="none">1</text>
+					<text x="251.8" y="1002.0" stroke="none">*</text>
+					<path d="M173.0 861.7 L243.75 990 L243.75 1003.3333333333334 L243.8 1003.3 "
+						fill="none"></path>
+					<path d="M238.4 996.7 L243.8 1003.3 L249.1 996.7 L243.8 1010.0 Z"></path>
+					<text x="48.5" y="959.0" stroke="none">1</text>
+					<text x="19.6" y="1017.5" stroke="none">*</text>
+					<path d="M40.5 939.0 L27.5 990 L32.62130300024306 1018.9353619513732 L32.6 1018.9 "
+						fill="none"></path>
+					<path d="M26.2 1013.3 L32.6 1018.9 L36.7 1011.4 L33.8 1025.5 Z"></path>
+					<text x="443.0" y="1172.3" stroke="none">*</text>
+					<text x="335.6" y="1454.0" stroke="none">1</text>
+					<path
+						d="M435.0 1152.3 L343.25 1216 L343.25 1329 L343.25 1329 L343.25 1442 L343.25 1442 L349.73253121427416 1455.9539231222511 L349.7 1456.0 "
+						fill="none"></path>
+					<path d="M342.1 1452.2 L349.7 1456.0 L351.8 1447.7 L352.5 1462.0 Z"></path>
+					<text x="491.8" y="1216.0" stroke="none">*</text>
+					<text x="521.7" y="1228.0" stroke="none">1</text>
+					<path d="M506.0 1196.0 L506 1216 L511.3363496171514 1229.7830287254426 L511.3 1229.8 "
+						fill="none"></path>
+					<path d="M504.0 1225.5 L511.3 1229.8 L513.9 1221.6 L513.7 1236.0 Z"></path>
+					<text x="300.5" y="1161.8" stroke="none">*</text>
+					<text x="503.3" y="1258.9" stroke="none">1</text>
+					<path d="M314.8 1141.8 L450.5 1216 L490.8505624625418 1261.9406907633977 L490.9 1261.9 "
+						fill="none"></path>
+					<path d="M482.4 1260.5 L490.9 1261.9 L490.5 1253.4 L495.3 1266.9 Z"></path>
+					<text x="158.5" y="1160.5" stroke="none">*</text>
+					<text x="358.3" y="1585.9" stroke="none">1</text>
+					<path
+						d="M172.8 1140.5 L29.75 1216 L29.75 1329 L29.75 1329 L29.75 1442 L29.75 1442 L344.2255388754996 1591.023856108912 L344.2 1591.0 "
+						fill="none"></path>
+					<path d="M335.9 1593.0 L344.2 1591.0 L340.5 1583.3 L350.3 1593.9 Z"></path>
+					<g data-name="Product Variant">
+						<g fill="#eee8d5" stroke="#33322E" data-name="Product Variant">
+							<rect x="362.0" y="474.0" height="496.0" width="154.0"
+								data-name="Product Variant"></rect>
+							<path d="M362.0 505.0 L516.0 505.0" fill="none" data-name="Product Variant"></path>
+							<path d="M362.0 536.0 L516.0 536.0" fill="none" data-name="Product Variant"></path>
+							<path d="M362.0 567.0 L516.0 567.0" fill="none" data-name="Product Variant"></path>
+							<path d="M362.0 598.0 L516.0 598.0" fill="none" data-name="Product Variant"></path>
+							<path d="M362.0 629.0 L516.0 629.0" fill="none" data-name="Product Variant"></path>
+							<path d="M362.0 660.0 L516.0 660.0" fill="none" data-name="Product Variant"></path>
+							<path d="M362.0 691.0 L516.0 691.0" fill="none" data-name="Product Variant"></path>
+							<path d="M362.0 722.0 L516.0 722.0" fill="none" data-name="Product Variant"></path>
+							<path d="M362.0 753.0 L516.0 753.0" fill="none" data-name="Product Variant"></path>
+							<path d="M362.0 784.0 L516.0 784.0" fill="none" data-name="Product Variant"></path>
+							<path d="M362.0 815.0 L516.0 815.0" fill="none" data-name="Product Variant"></path>
+							<path d="M362.0 846.0 L516.0 846.0" fill="none" data-name="Product Variant"></path>
+							<path d="M362.0 877.0 L516.0 877.0" fill="none" data-name="Product Variant"></path>
+							<path d="M362.0 908.0 L516.0 908.0" fill="none" data-name="Product Variant"></path>
+							<path d="M362.0 939.0 L516.0 939.0" fill="none" data-name="Product Variant"></path>
+						</g>
+						<g transform="translate(362, 474)" font-family="Helvetica" font-size="12pt"
+							font-weight="bold" font-style="normal" data-name="Product Variant">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center"
+								data-name="Product Variant">
+								<text x="69.0" y="13.5" stroke="none" text-anchor="middle"
+									data-name="Product Variant">Product Variant
+								</text>
+
+							</g>
+						</g>
+						<g transform="translate(362, 505)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Product Variant">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Product Variant">
+								<text x="0.0" y="13.5" stroke="none" data-name="Product Variant">id</text>
+
+							</g>
+						</g>
+						<g transform="translate(362, 536)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Product Variant">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Product Variant">
+								<text x="0.0" y="13.5" stroke="none" data-name="Product Variant">name</text>
+
+							</g>
+						</g>
+						<g transform="translate(362, 567)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Product Variant">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Product Variant">
+								<text x="0.0" y="13.5" stroke="none" data-name="Product Variant">taxGroupId</text>
+
+							</g>
+						</g>
+						<g transform="translate(362, 598)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Product Variant">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Product Variant">
+								<text x="0.0" y="13.5" stroke="none" data-name="Product Variant">isArchived</text>
+
+							</g>
+						</g>
+						<g transform="translate(362, 629)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Product Variant">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Product Variant">
+								<text x="0.0" y="13.5" stroke="none" data-name="Product Variant">displayNames</text>
+
+							</g>
+						</g>
+						<g transform="translate(362, 660)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Product Variant">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Product Variant">
+								<text x="0.0" y="13.5" stroke="none" data-name="Product Variant">description</text>
+
+							</g>
+						</g>
+						<g transform="translate(362, 691)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Product Variant">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Product Variant">
+								<text x="0.0" y="13.5" stroke="none" data-name="Product Variant">
+									displayDescriptions
+								</text>
+
+							</g>
+						</g>
+						<g transform="translate(362, 722)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Product Variant">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Product Variant">
+								<text x="0.0" y="13.5" stroke="none" data-name="Product Variant">isActive</text>
+
+							</g>
+						</g>
+						<g transform="translate(362, 753)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Product Variant">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Product Variant">
+								<text x="0.0" y="13.5" stroke="none" data-name="Product Variant">imageUrl</text>
+
+							</g>
+						</g>
+						<g transform="translate(362, 784)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Product Variant">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Product Variant">
+								<text x="0.0" y="13.5" stroke="none" data-name="Product Variant">updated</text>
+
+							</g>
+						</g>
+						<g transform="translate(362, 815)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Product Variant">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Product Variant">
+								<text x="0.0" y="13.5" stroke="none" data-name="Product Variant">created</text>
+
+							</g>
+						</g>
+						<g transform="translate(362, 846)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Product Variant">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Product Variant">
+								<text x="0.0" y="13.5" stroke="none" data-name="Product Variant">slug</text>
+
+							</g>
+						</g>
+						<g transform="translate(362, 877)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Product Variant">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Product Variant">
+								<text x="0.0" y="13.5" stroke="none" data-name="Product Variant">productParentId
+								</text>
+
+							</g>
+						</g>
+						<g transform="translate(362, 908)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Product Variant">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Product Variant">
+								<text x="0.0" y="13.5" stroke="none" data-name="Product Variant">customAttributes
+								</text>
+
+							</g>
+						</g>
+						<g transform="translate(362, 939)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Product Variant">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Product Variant">
+								<text x="0.0" y="13.5" stroke="none" data-name="Product Variant">tags</text>
+
+							</g>
+						</g>
+					</g>
+					<g data-name="Product Parent">
+						<g fill="#eee8d5" stroke="#33322E" data-name="Product Parent">
+							<rect x="227.0" y="0.0" height="434.0" width="154.0"
+								data-name="Product Parent"></rect>
+							<path d="M227.0 31.0 L381.0 31.0" fill="none" data-name="Product Parent"></path>
+							<path d="M227.0 62.0 L381.0 62.0" fill="none" data-name="Product Parent"></path>
+							<path d="M227.0 93.0 L381.0 93.0" fill="none" data-name="Product Parent"></path>
+							<path d="M227.0 124.0 L381.0 124.0" fill="none" data-name="Product Parent"></path>
+							<path d="M227.0 155.0 L381.0 155.0" fill="none" data-name="Product Parent"></path>
+							<path d="M227.0 186.0 L381.0 186.0" fill="none" data-name="Product Parent"></path>
+							<path d="M227.0 217.0 L381.0 217.0" fill="none" data-name="Product Parent"></path>
+							<path d="M227.0 248.0 L381.0 248.0" fill="none" data-name="Product Parent"></path>
+							<path d="M227.0 279.0 L381.0 279.0" fill="none" data-name="Product Parent"></path>
+							<path d="M227.0 310.0 L381.0 310.0" fill="none" data-name="Product Parent"></path>
+							<path d="M227.0 341.0 L381.0 341.0" fill="none" data-name="Product Parent"></path>
+							<path d="M227.0 372.0 L381.0 372.0" fill="none" data-name="Product Parent"></path>
+							<path d="M227.0 403.0 L381.0 403.0" fill="none" data-name="Product Parent"></path>
+						</g>
+						<g transform="translate(227, 0)" font-family="Helvetica" font-size="12pt"
+							font-weight="bold" font-style="normal" data-name="Product Parent">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center"
+								data-name="Product Parent">
+								<text x="69.0" y="13.5" stroke="none" text-anchor="middle"
+									data-name="Product Parent">Product Parent
+								</text>
+
+							</g>
+						</g>
+						<g transform="translate(227, 31)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Product Parent">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Product Parent">
+								<text x="0.0" y="13.5" stroke="none" data-name="Product Parent">id</text>
+
+							</g>
+						</g>
+						<g transform="translate(227, 62)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Product Parent">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Product Parent">
+								<text x="0.0" y="13.5" stroke="none" data-name="Product Parent">name</text>
+
+							</g>
+						</g>
+						<g transform="translate(227, 93)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Product Parent">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Product Parent">
+								<text x="0.0" y="13.5" stroke="none" data-name="Product Parent">isArchived</text>
+
+							</g>
+						</g>
+						<g transform="translate(227, 124)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Product Parent">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Product Parent">
+								<text x="0.0" y="13.5" stroke="none" data-name="Product Parent">displayNames</text>
+
+							</g>
+						</g>
+						<g transform="translate(227, 155)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Product Parent">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Product Parent">
+								<text x="0.0" y="13.5" stroke="none" data-name="Product Parent">description</text>
+
+							</g>
+						</g>
+						<g transform="translate(227, 186)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Product Parent">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Product Parent">
+								<text x="0.0" y="13.5" stroke="none" data-name="Product Parent">
+									displayDescriptions
+								</text>
+
+							</g>
+						</g>
+						<g transform="translate(227, 217)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Product Parent">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Product Parent">
+								<text x="0.0" y="13.5" stroke="none" data-name="Product Parent">isActive</text>
+
+							</g>
+						</g>
+						<g transform="translate(227, 248)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Product Parent">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Product Parent">
+								<text x="0.0" y="13.5" stroke="none" data-name="Product Parent">imageUrl</text>
+
+							</g>
+						</g>
+						<g transform="translate(227, 279)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Product Parent">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Product Parent">
+								<text x="0.0" y="13.5" stroke="none" data-name="Product Parent">updated</text>
+
+							</g>
+						</g>
+						<g transform="translate(227, 310)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Product Parent">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Product Parent">
+								<text x="0.0" y="13.5" stroke="none" data-name="Product Parent">created</text>
+
+							</g>
+						</g>
+						<g transform="translate(227, 341)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Product Parent">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Product Parent">
+								<text x="0.0" y="13.5" stroke="none" data-name="Product Parent">slug</text>
+
+							</g>
+						</g>
+						<g transform="translate(227, 372)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Product Parent">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Product Parent">
+								<text x="0.0" y="13.5" stroke="none" data-name="Product Parent">customAttributes
+								</text>
+
+							</g>
+						</g>
+						<g transform="translate(227, 403)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Product Parent">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Product Parent">
+								<text x="0.0" y="13.5" stroke="none" data-name="Product Parent">tags</text>
+
+							</g>
+						</g>
+					</g>
+					<g data-name="Addon">
+						<g fill="#eee8d5" stroke="#33322E" data-name="Addon">
+							<rect x="19.0" y="505.0" height="434.0" width="154.0" data-name="Addon"></rect>
+							<path d="M19.0 536.0 L173.0 536.0" fill="none" data-name="Addon"></path>
+							<path d="M19.0 567.0 L173.0 567.0" fill="none" data-name="Addon"></path>
+							<path d="M19.0 598.0 L173.0 598.0" fill="none" data-name="Addon"></path>
+							<path d="M19.0 629.0 L173.0 629.0" fill="none" data-name="Addon"></path>
+							<path d="M19.0 660.0 L173.0 660.0" fill="none" data-name="Addon"></path>
+							<path d="M19.0 691.0 L173.0 691.0" fill="none" data-name="Addon"></path>
+							<path d="M19.0 722.0 L173.0 722.0" fill="none" data-name="Addon"></path>
+							<path d="M19.0 753.0 L173.0 753.0" fill="none" data-name="Addon"></path>
+							<path d="M19.0 784.0 L173.0 784.0" fill="none" data-name="Addon"></path>
+							<path d="M19.0 815.0 L173.0 815.0" fill="none" data-name="Addon"></path>
+							<path d="M19.0 846.0 L173.0 846.0" fill="none" data-name="Addon"></path>
+							<path d="M19.0 877.0 L173.0 877.0" fill="none" data-name="Addon"></path>
+							<path d="M19.0 908.0 L173.0 908.0" fill="none" data-name="Addon"></path>
+						</g>
+						<g transform="translate(19, 505)" font-family="Helvetica" font-size="12pt"
+							font-weight="bold" font-style="normal" data-name="Addon">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Addon">
+								<text x="69.0" y="13.5" stroke="none" text-anchor="middle" data-name="Addon">Addon
+								</text>
+
+							</g>
+						</g>
+						<g transform="translate(19, 536)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Addon">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Addon">
+								<text x="0.0" y="13.5" stroke="none" data-name="Addon">id</text>
+
+							</g>
+						</g>
+						<g transform="translate(19, 567)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Addon">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Addon">
+								<text x="0.0" y="13.5" stroke="none" data-name="Addon">name</text>
+
+							</g>
+						</g>
+						<g transform="translate(19, 598)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Addon">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Addon">
+								<text x="0.0" y="13.5" stroke="none" data-name="Addon">taxGroupId</text>
+
+							</g>
+						</g>
+						<g transform="translate(19, 629)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Addon">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Addon">
+								<text x="0.0" y="13.5" stroke="none" data-name="Addon">isArchived</text>
+
+							</g>
+						</g>
+						<g transform="translate(19, 660)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Addon">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Addon">
+								<text x="0.0" y="13.5" stroke="none" data-name="Addon">displayNames</text>
+
+							</g>
+						</g>
+						<g transform="translate(19, 691)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Addon">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Addon">
+								<text x="0.0" y="13.5" stroke="none" data-name="Addon">description</text>
+
+							</g>
+						</g>
+						<g transform="translate(19, 722)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Addon">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Addon">
+								<text x="0.0" y="13.5" stroke="none" data-name="Addon">displayDescriptions</text>
+
+							</g>
+						</g>
+						<g transform="translate(19, 753)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Addon">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Addon">
+								<text x="0.0" y="13.5" stroke="none" data-name="Addon">isActive</text>
+
+							</g>
+						</g>
+						<g transform="translate(19, 784)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Addon">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Addon">
+								<text x="0.0" y="13.5" stroke="none" data-name="Addon">imageUrl</text>
+
+							</g>
+						</g>
+						<g transform="translate(19, 815)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Addon">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Addon">
+								<text x="0.0" y="13.5" stroke="none" data-name="Addon">updated</text>
+
+							</g>
+						</g>
+						<g transform="translate(19, 846)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Addon">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Addon">
+								<text x="0.0" y="13.5" stroke="none" data-name="Addon">created</text>
+
+							</g>
+						</g>
+						<g transform="translate(19, 877)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Addon">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Addon">
+								<text x="0.0" y="13.5" stroke="none" data-name="Addon">customAttributes</text>
+
+							</g>
+						</g>
+						<g transform="translate(19, 908)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Addon">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Addon">
+								<text x="0.0" y="13.5" stroke="none" data-name="Addon">tags</text>
+
+							</g>
+						</g>
+					</g>
+					<g data-name="Store Market">
+						<g fill="#eee8d5" stroke="#33322E" data-name="Store Market">
+							<rect x="350.0" y="1462.0" height="341.0" width="163.0"
+								data-name="Store Market"></rect>
+							<path d="M350.0 1493.0 L513.0 1493.0" fill="none" data-name="Store Market"></path>
+							<path d="M350.0 1524.0 L513.0 1524.0" fill="none" data-name="Store Market"></path>
+							<path d="M350.0 1555.0 L513.0 1555.0" fill="none" data-name="Store Market"></path>
+							<path d="M350.0 1586.0 L513.0 1586.0" fill="none" data-name="Store Market"></path>
+							<path d="M350.0 1617.0 L513.0 1617.0" fill="none" data-name="Store Market"></path>
+							<path d="M350.0 1648.0 L513.0 1648.0" fill="none" data-name="Store Market"></path>
+							<path d="M350.0 1679.0 L513.0 1679.0" fill="none" data-name="Store Market"></path>
+							<path d="M350.0 1710.0 L513.0 1710.0" fill="none" data-name="Store Market"></path>
+							<path d="M350.0 1741.0 L513.0 1741.0" fill="none" data-name="Store Market"></path>
+							<path d="M350.0 1772.0 L513.0 1772.0" fill="none" data-name="Store Market"></path>
+						</g>
+						<g transform="translate(350, 1462)" font-family="Helvetica" font-size="12pt"
+							font-weight="bold" font-style="normal" data-name="Store Market">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center"
+								data-name="Store Market">
+								<text x="73.5" y="13.5" stroke="none" text-anchor="middle" data-name="Store Market">
+									Store Market
+								</text>
+
+							</g>
+						</g>
+						<g transform="translate(350, 1493)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Store Market">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Store Market">
+								<text x="0.0" y="13.5" stroke="none" data-name="Store Market">languagesCodes</text>
+
+							</g>
+						</g>
+						<g transform="translate(350, 1524)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Store Market">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Store Market">
+								<text x="0.0" y="13.5" stroke="none" data-name="Store Market">name</text>
+
+							</g>
+						</g>
+						<g transform="translate(350, 1555)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Store Market">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Store Market">
+								<text x="0.0" y="13.5" stroke="none" data-name="Store Market">storeGroupId</text>
+
+							</g>
+						</g>
+						<g transform="translate(350, 1586)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Store Market">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Store Market">
+								<text x="0.0" y="13.5" stroke="none" data-name="Store Market">isTaxIncludedInPrice
+								</text>
+
+							</g>
+						</g>
+						<g transform="translate(350, 1617)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Store Market">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Store Market">
+								<text x="0.0" y="13.5" stroke="none" data-name="Store Market">countryCode</text>
+
+							</g>
+						</g>
+						<g transform="translate(350, 1648)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Store Market">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Store Market">
+								<text x="0.0" y="13.5" stroke="none" data-name="Store Market">isArchived</text>
+
+							</g>
+						</g>
+						<g transform="translate(350, 1679)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Store Market">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Store Market">
+								<text x="0.0" y="13.5" stroke="none" data-name="Store Market">created</text>
+
+							</g>
+						</g>
+						<g transform="translate(350, 1710)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Store Market">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Store Market">
+								<text x="0.0" y="13.5" stroke="none" data-name="Store Market">description</text>
+
+							</g>
+						</g>
+						<g transform="translate(350, 1741)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Store Market">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Store Market">
+								<text x="0.0" y="13.5" stroke="none" data-name="Store Market">currencyCode</text>
+
+							</g>
+						</g>
+						<g transform="translate(350, 1772)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Store Market">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Store Market">
+								<text x="0.0" y="13.5" stroke="none" data-name="Store Market">updated</text>
+
+							</g>
+						</g>
+					</g>
+					<g data-name="Store Group">
+						<g fill="#eee8d5" stroke="#33322E" data-name="Store Group">
+							<rect x="495.0" y="1236.0" height="186.0" width="109.0"
+								data-name="Store Group"></rect>
+							<path d="M495.0 1267.0 L604.0 1267.0" fill="none" data-name="Store Group"></path>
+							<path d="M495.0 1298.0 L604.0 1298.0" fill="none" data-name="Store Group"></path>
+							<path d="M495.0 1329.0 L604.0 1329.0" fill="none" data-name="Store Group"></path>
+							<path d="M495.0 1360.0 L604.0 1360.0" fill="none" data-name="Store Group"></path>
+							<path d="M495.0 1391.0 L604.0 1391.0" fill="none" data-name="Store Group"></path>
+						</g>
+						<g transform="translate(495, 1236)" font-family="Helvetica" font-size="12pt"
+							font-weight="bold" font-style="normal" data-name="Store Group">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center"
+								data-name="Store Group">
+								<text x="46.5" y="13.5" stroke="none" text-anchor="middle" data-name="Store Group">
+									Store Group
+								</text>
+
+							</g>
+						</g>
+						<g transform="translate(495, 1267)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Store Group">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Store Group">
+								<text x="0.0" y="13.5" stroke="none" data-name="Store Group">id</text>
+
+							</g>
+						</g>
+						<g transform="translate(495, 1298)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Store Group">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Store Group">
+								<text x="0.0" y="13.5" stroke="none" data-name="Store Group">name</text>
+
+							</g>
+						</g>
+						<g transform="translate(495, 1329)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Store Group">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Store Group">
+								<text x="0.0" y="13.5" stroke="none" data-name="Store Group">description</text>
+
+							</g>
+						</g>
+						<g transform="translate(495, 1360)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Store Group">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Store Group">
+								<text x="0.0" y="13.5" stroke="none" data-name="Store Group">created</text>
+
+							</g>
+						</g>
+						<g transform="translate(495, 1391)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Store Group">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Store Group">
+								<text x="0.0" y="13.5" stroke="none" data-name="Store Group">updated</text>
+
+							</g>
+						</g>
+					</g>
+					<g data-name="Price Variant">
+						<g fill="#eee8d5" stroke="#33322E" data-name="Price Variant">
+							<rect x="435.0" y="1010.0" height="186.0" width="142.0"
+								data-name="Price Variant"></rect>
+							<path d="M435.0 1041.0 L577.0 1041.0" fill="none" data-name="Price Variant"></path>
+							<path d="M435.0 1072.0 L577.0 1072.0" fill="none" data-name="Price Variant"></path>
+							<path d="M435.0 1103.0 L577.0 1103.0" fill="none" data-name="Price Variant"></path>
+							<path d="M435.0 1134.0 L577.0 1134.0" fill="none" data-name="Price Variant"></path>
+							<path d="M435.0 1165.0 L577.0 1165.0" fill="none" data-name="Price Variant"></path>
+						</g>
+						<g transform="translate(435, 1010)" font-family="Helvetica" font-size="12pt"
+							font-weight="bold" font-style="normal" data-name="Price Variant">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center"
+								data-name="Price Variant">
+								<text x="63.0" y="13.5" stroke="none" text-anchor="middle"
+									data-name="Price Variant">Price Variant
+								</text>
+
+							</g>
+						</g>
+						<g transform="translate(435, 1041)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Price Variant">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Price Variant">
+								<text x="0.0" y="13.5" stroke="none" data-name="Price Variant">basePriceAmount
+								</text>
+
+							</g>
+						</g>
+						<g transform="translate(435, 1072)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Price Variant">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Price Variant">
+								<text x="0.0" y="13.5" stroke="none" data-name="Price Variant">salePriceAmount
+								</text>
+
+							</g>
+						</g>
+						<g transform="translate(435, 1103)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Price Variant">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Price Variant">
+								<text x="0.0" y="13.5" stroke="none" data-name="Price Variant">CountryCode</text>
+
+							</g>
+						</g>
+						<g transform="translate(435, 1134)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Price Variant">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Price Variant">
+								<text x="0.0" y="13.5" stroke="none" data-name="Price Variant">variantId</text>
+
+							</g>
+						</g>
+						<g transform="translate(435, 1165)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Price Variant">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Price Variant">
+								<text x="0.0" y="13.5" stroke="none" data-name="Price Variant">storeGroupId</text>
+
+							</g>
+						</g>
+					</g>
+					<g data-name="Price Addon">
+						<g fill="#eee8d5" stroke="#33322E" data-name="Price Addon">
+							<rect x="173.0" y="1010.0" height="186.0" width="142.0"
+								data-name="Price Addon"></rect>
+							<path d="M173.0 1041.0 L315.0 1041.0" fill="none" data-name="Price Addon"></path>
+							<path d="M173.0 1072.0 L315.0 1072.0" fill="none" data-name="Price Addon"></path>
+							<path d="M173.0 1103.0 L315.0 1103.0" fill="none" data-name="Price Addon"></path>
+							<path d="M173.0 1134.0 L315.0 1134.0" fill="none" data-name="Price Addon"></path>
+							<path d="M173.0 1165.0 L315.0 1165.0" fill="none" data-name="Price Addon"></path>
+						</g>
+						<g transform="translate(173, 1010)" font-family="Helvetica" font-size="12pt"
+							font-weight="bold" font-style="normal" data-name="Price Addon">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center"
+								data-name="Price Addon">
+								<text x="63.0" y="13.5" stroke="none" text-anchor="middle" data-name="Price Addon">
+									Price Addon
+								</text>
+
+							</g>
+						</g>
+						<g transform="translate(173, 1041)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Price Addon">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Price Addon">
+								<text x="0.0" y="13.5" stroke="none" data-name="Price Addon">basePriceAmount</text>
+
+							</g>
+						</g>
+						<g transform="translate(173, 1072)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Price Addon">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Price Addon">
+								<text x="0.0" y="13.5" stroke="none" data-name="Price Addon">salePriceAmount</text>
+
+							</g>
+						</g>
+						<g transform="translate(173, 1103)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Price Addon">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Price Addon">
+								<text x="0.0" y="13.5" stroke="none" data-name="Price Addon">CountryCode</text>
+
+							</g>
+						</g>
+						<g transform="translate(173, 1134)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Price Addon">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Price Addon">
+								<text x="0.0" y="13.5" stroke="none" data-name="Price Addon">addonId</text>
+
+							</g>
+						</g>
+						<g transform="translate(173, 1165)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Price Addon">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Price Addon">
+								<text x="0.0" y="13.5" stroke="none" data-name="Price Addon">storeGroupId</text>
+
+							</g>
+						</g>
+					</g>
+					<g data-name="Tax Group">
+						<g fill="#eee8d5" stroke="#33322E" data-name="Tax Group">
+							<rect x="0.0" y="1026.0" height="155.0" width="95.0" data-name="Tax Group"></rect>
+							<path d="M0.0 1057.0 L95.0 1057.0" fill="none" data-name="Tax Group"></path>
+							<path d="M0.0 1088.0 L95.0 1088.0" fill="none" data-name="Tax Group"></path>
+							<path d="M0.0 1119.0 L95.0 1119.0" fill="none" data-name="Tax Group"></path>
+							<path d="M0.0 1150.0 L95.0 1150.0" fill="none" data-name="Tax Group"></path>
+						</g>
+						<g transform="translate(0, 1026)" font-family="Helvetica" font-size="12pt"
+							font-weight="bold" font-style="normal" data-name="Tax Group">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center"
+								data-name="Tax Group">
+								<text x="39.5" y="13.5" stroke="none" text-anchor="middle" data-name="Tax Group">Tax
+									Group
+								</text>
+
+							</g>
+						</g>
+						<g transform="translate(0, 1057)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Tax Group">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Tax Group">
+								<text x="0.0" y="13.5" stroke="none" data-name="Tax Group">name</text>
+
+							</g>
+						</g>
+						<g transform="translate(0, 1088)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Tax Group">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Tax Group">
+								<text x="0.0" y="13.5" stroke="none" data-name="Tax Group">description</text>
+
+							</g>
+						</g>
+						<g transform="translate(0, 1119)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Tax Group">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Tax Group">
+								<text x="0.0" y="13.5" stroke="none" data-name="Tax Group">created</text>
+
+							</g>
+						</g>
+						<g transform="translate(0, 1150)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Tax Group">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Tax Group">
+								<text x="0.0" y="13.5" stroke="none" data-name="Tax Group">updated</text>
+
+							</g>
+						</g>
+					</g>
+					<g data-name="Tax Market">
+						<g fill="#eee8d5" stroke="#33322E" data-name="Tax Market">
+							<rect x="70.0" y="1252.0" height="155.0" width="185.0" data-name="Tax Market"></rect>
+							<path d="M70.0 1283.0 L255.0 1283.0" fill="none" data-name="Tax Market"></path>
+							<path d="M70.0 1314.0 L255.0 1314.0" fill="none" data-name="Tax Market"></path>
+							<path d="M70.0 1345.0 L255.0 1345.0" fill="none" data-name="Tax Market"></path>
+							<path d="M70.0 1376.0 L255.0 1376.0" fill="none" data-name="Tax Market"></path>
+						</g>
+						<g transform="translate(70, 1252)" font-family="Helvetica" font-size="12pt"
+							font-weight="bold" font-style="normal" data-name="Tax Market">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="center"
+								data-name="Tax Market">
+								<text x="84.5" y="13.5" stroke="none" text-anchor="middle" data-name="Tax Market">
+									Tax Market
+								</text>
+
+							</g>
+						</g>
+						<g transform="translate(70, 1283)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Tax Market">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Tax Market">
+								<text x="0.0" y="13.5" stroke="none" data-name="Tax Market">taxGroupId</text>
+
+							</g>
+						</g>
+						<g transform="translate(70, 1314)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Tax Market">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Tax Market">
+								<text x="0.0" y="13.5" stroke="none" data-name="Tax Market">countryCode</text>
+
+							</g>
+						</g>
+						<g transform="translate(70, 1345)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Tax Market">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Tax Market">
+								<text x="0.0" y="13.5" stroke="none" data-name="Tax Market">taxPercentage</text>
+
+							</g>
+						</g>
+						<g transform="translate(70, 1376)" font-family="Helvetica" font-size="12pt"
+							font-weight="normal" font-style="normal" data-name="Tax Market">
+							<g transform="translate(8, 8)" fill="#33322E" text-align="left"
+								data-name="Tax Market">
+								<text x="0.0" y="13.5" stroke="none" data-name="Tax Market">taxPercentageDecimals
+								</text>
+
+							</g>
+						</g>
+					</g>
+				</g>
+			</g>
+		</g>
+	</g>
+</svg>
