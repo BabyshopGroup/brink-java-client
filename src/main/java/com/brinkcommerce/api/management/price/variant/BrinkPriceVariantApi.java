@@ -9,8 +9,8 @@ import com.brinkcommerce.api.authentication.AuthenticationHandler;
 import com.brinkcommerce.api.configuration.ManagementConfiguration;
 import com.brinkcommerce.api.exception.BrinkIntegrationException;
 import com.brinkcommerce.api.management.price.BrinkPriceException;
-import com.brinkcommerce.api.management.price.variant.model.BrinkPriceVariantDeleteRequest;
-import com.brinkcommerce.api.management.price.variant.model.BrinkPriceVariantListRequest;
+import com.brinkcommerce.api.management.price.variant.model.BrinkPriceVariantPatchRequest;
+import com.brinkcommerce.api.management.price.variant.model.BrinkPriceVariantPutRequest;
 import com.brinkcommerce.api.management.price.variant.model.BrinkPriceVariantListResponse;
 import com.brinkcommerce.api.management.price.variant.model.BrinkPriceVariantRequest;
 import com.brinkcommerce.api.utils.BrinkHttpUtil;
@@ -53,25 +53,25 @@ public class BrinkPriceVariantApi {
    * HTTP method: PUT. URI:
    * /store-groups/{storeGroupId}/markets/{countryCode}/product-variants/{variantId}/price
    *
-   * @param brinkPriceVariantListRequest includes com.brinkcommerce.api.Brink prices for a com.brinkcommerce.api.Brink product variants.
+   * @param brinkPriceVariantPutRequest includes com.brinkcommerce.api.Brink prices for a com.brinkcommerce.api.Brink product variants.
    * @return BrinkPriceVariantList a com.brinkcommerce.api.Brink price for a com.brinkcommerce.api.Brink product variant.
    * @throws BrinkPriceException if an error occurs
    */
   public BrinkPriceVariantListResponse create(
-      final BrinkPriceVariantListRequest brinkPriceVariantListRequest) {
-    Objects.requireNonNull(brinkPriceVariantListRequest, "com.brinkcommerce.api.Brink price variant list cannot be null");
+      final BrinkPriceVariantPutRequest brinkPriceVariantPutRequest) {
+    Objects.requireNonNull(brinkPriceVariantPutRequest, "com.brinkcommerce.api.Brink price variant list cannot be null");
 
     try {
       final HttpRequest httpRequest =
           httpRequestBuilderWithAuthentication(
               URI.create(
-                  BrinkHttpUtil.buildURI(brinkPriceVariantListRequest,
+                  BrinkHttpUtil.buildURI(brinkPriceVariantPutRequest,
                       this.priceVariantUrl.toString())),
               this.authenticationHandler.getToken(),
               this.authenticationHandler.getApiKey())
               .PUT(
                   HttpRequest.BodyPublishers.ofString(
-                      this.mapper.writeValueAsString(brinkPriceVariantListRequest)))
+                      this.mapper.writeValueAsString(brinkPriceVariantPutRequest)))
               .header(CONTENT_TYPE, APPLICATION_JSON)
               .build();
 
@@ -83,44 +83,50 @@ public class BrinkPriceVariantApi {
       Thread.currentThread().interrupt();
       throw new BrinkPriceException(
           String.format("Failed to create price with variant variantId %s.",
-              brinkPriceVariantListRequest.productVariantId()),
+              brinkPriceVariantPutRequest.productVariantId()),
           ie,
           null);
     } catch (final BrinkIntegrationException e) {
       throw new BrinkPriceException(
           String.format("Failed to create price with variant variantId %s.",
-              brinkPriceVariantListRequest.productVariantId()),
+              brinkPriceVariantPutRequest.productVariantId()),
           e,
           e.brinkHttpCode(),
           e.requestId());
     } catch (final Exception e) {
       throw new BrinkPriceException(
           String.format("Failed to create price with variant variantId %s.",
-              brinkPriceVariantListRequest.productVariantId()),
+              brinkPriceVariantPutRequest.productVariantId()),
           e,
           null);
     }
   }
 
   /**
-   * Returns com.brinkcommerce.api.Brink price for a com.brinkcommerce.api.Brink product variant in a market of a store-group. HTTP method: GET.
-   * URI:
-   * /store-groups/{storeGroupId}/markets/{countryCode}/product-variants/{variantId}/price
+   * Updates and returns a com.brinkcommerce.api.Brink price for a com.brinkcommerce.api.Brink product variant in a market of a store-group.
+   * HTTP method: PATCH. URI:
+   * /store-groups/{storeGroupId}/markets/{countryCode}/product-variants/{variantId}/prices
    *
-   * @param request which holds the request
-   * @return BrinkPrice a price object
+   * @param brinkPriceVariantPatchRequest includes com.brinkcommerce.api.Brink prices for a com.brinkcommerce.api.Brink product variants.
+   * @return BrinkPriceVariantList a com.brinkcommerce.api.Brink price for a com.brinkcommerce.api.Brink product variant.
    * @throws BrinkPriceException if an error occurs
    */
-  public BrinkPriceVariantListResponse get(final BrinkPriceVariantRequest request) {
-    Objects.requireNonNull(request, "com.brinkcommerce.api.Brink price variant cannot be null");
+  public BrinkPriceVariantListResponse update(
+      final BrinkPriceVariantPatchRequest brinkPriceVariantPatchRequest) {
+    Objects.requireNonNull(brinkPriceVariantPatchRequest, "com.brinkcommerce.api.Brink price variant list cannot be null");
 
     try {
       final HttpRequest httpRequest =
           httpRequestBuilderWithAuthentication(
-              URI.create(BrinkHttpUtil.buildURI(request, this.priceVariantUrl.toString())),
+              URI.create(
+                  BrinkHttpUtil.buildURI(brinkPriceVariantPatchRequest,
+                      this.priceVariantUrl.toString())),
               this.authenticationHandler.getToken(),
               this.authenticationHandler.getApiKey())
-              .GET()
+              .PUT(
+                  HttpRequest.BodyPublishers.ofString(
+                      this.mapper.writeValueAsString(brinkPriceVariantPatchRequest)))
+              .header(CONTENT_TYPE, APPLICATION_JSON)
               .build();
 
       final HttpResponse<String> response = makeRequest(httpRequest);
@@ -130,57 +136,67 @@ public class BrinkPriceVariantApi {
     } catch (final InterruptedException ie) {
       Thread.currentThread().interrupt();
       throw new BrinkPriceException(
-          String.format("Failed to get price with variant variantId %s.", request.productVariantId()), ie, null);
+          String.format("Failed to update price with variant variantId %s.",
+              brinkPriceVariantPatchRequest.productVariantId()),
+          ie,
+          null);
     } catch (final BrinkIntegrationException e) {
       throw new BrinkPriceException(
-          String.format("Failed to get price with variant variantId %s.", request.productVariantId()),
+          String.format("Failed to update price with variant variantId %s.",
+              brinkPriceVariantPatchRequest.productVariantId()),
           e,
           e.brinkHttpCode(),
           e.requestId());
     } catch (final Exception e) {
       throw new BrinkPriceException(
-          String.format("Failed to get price with variant variantId %s.", request.productVariantId()), e, null);
-    }
-  }
-
-  /**
-   * Deletes a com.brinkcommerce.api.Brink price for a com.brinkcommerce.api.Brink product variant in a market of a store-group. HTTP method:
-   * DELETE. URI:
-   * /store-groups/{storeGroupId}/markets/{countryCode}/product-variants/{variantId}/price
-   *
-   * @param request which holds the request
-   * @throws BrinkPriceException if an error occurs
-   */
-  public void delete(final BrinkPriceVariantDeleteRequest request) {
-    Objects.requireNonNull(request, "com.brinkcommerce.api.Brink price variant cannot be null");
-
-    try {
-      final HttpRequest httpRequest =
-          httpRequestBuilderWithAuthentication(
-              URI.create(buildURI(request, this.priceVariantUrl.toString())),
-              this.authenticationHandler.getToken(),
-              this.authenticationHandler.getApiKey())
-              .DELETE()
-              .build();
-
-      final HttpResponse<String> response = makeRequest(httpRequest);
-
-      this.brinkHttpUtil.handleResponse(response, Void.class);
-    } catch (final InterruptedException ie) {
-      Thread.currentThread().interrupt();
-      throw new BrinkPriceException(
-          String.format("Failed to delete price with variant variantId %s.", request.productVariantId()), ie, null);
-    } catch (final BrinkIntegrationException e) {
-      throw new BrinkPriceException(
-          String.format("Failed to delete price with variant variantId %s.", request.productVariantId()),
+          String.format("Failed to update price with variant variantId %s.",
+              brinkPriceVariantPatchRequest.productVariantId()),
           e,
-          e.brinkHttpCode(),
-          e.requestId());
-    } catch (final Exception e) {
-      throw new BrinkPriceException(
-          String.format("Failed to delete price with variant variantId %s.", request.productVariantId()), e, null);
+          null);
     }
   }
+
+    /**
+     * Returns com.brinkcommerce.api.Brink price for a com.brinkcommerce.api.Brink product variant in a market of a store-group. HTTP method: GET.
+     * URI:
+     * /store-groups/{storeGroupId}/markets/{countryCode}/product-variants/{variantId}/price
+     *
+     * @param request which holds the request
+     * @return BrinkPrice a price object
+     * @throws BrinkPriceException if an error occurs
+     */
+
+    public BrinkPriceVariantListResponse get(final BrinkPriceVariantRequest request){
+      Objects.requireNonNull(request, "com.brinkcommerce.api.Brink price variant cannot be null");
+
+      try {
+        final HttpRequest httpRequest =
+            httpRequestBuilderWithAuthentication(
+                URI.create(BrinkHttpUtil.buildURI(request, this.priceVariantUrl.toString())),
+                this.authenticationHandler.getToken(),
+                this.authenticationHandler.getApiKey())
+                .GET()
+                .build();
+
+        final HttpResponse<String> response = makeRequest(httpRequest);
+
+        return (BrinkPriceVariantListResponse)
+            this.brinkHttpUtil.handleResponse(response, BrinkPriceVariantListResponse.class);
+      } catch (final InterruptedException ie) {
+        Thread.currentThread().interrupt();
+        throw new BrinkPriceException(
+            String.format("Failed to get price with variant variantId %s.", request.productVariantId()), ie, null);
+      } catch (final BrinkIntegrationException e) {
+        throw new BrinkPriceException(
+            String.format("Failed to get price with variant variantId %s.", request.productVariantId()),
+            e,
+            e.brinkHttpCode(),
+            e.requestId());
+      } catch (final Exception e) {
+        throw new BrinkPriceException(
+            String.format("Failed to get price with variant variantId %s.", request.productVariantId()), e, null);
+      }
+    }
 
   private HttpResponse<String> makeRequest(final HttpRequest request)
       throws IOException, InterruptedException {

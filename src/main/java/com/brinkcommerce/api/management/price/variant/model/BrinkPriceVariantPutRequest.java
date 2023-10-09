@@ -2,13 +2,13 @@ package com.brinkcommerce.api.management.price.variant.model;
 
 import java.util.List;
 
-public record BrinkPriceVariantListRequest(
-    List<BrinkPriceVariant> productVariantPrices,
+public record BrinkPriceVariantPutRequest(
+    List<BrinkPriceVariantWithCountry> productVariantPrices,
     String productVariantId,
     String storeGroupId) implements VariantRequest {
 
 
-  private BrinkPriceVariantListRequest(final
+  private BrinkPriceVariantPutRequest(final
       BrinkPriceVariantListRequestBuilder builder) {
     this(
         builder.productVariantPrices,
@@ -23,7 +23,7 @@ public record BrinkPriceVariantListRequest(
 
   public static class BrinkPriceVariantListRequestBuilder {
 
-    private List<BrinkPriceVariant> productVariantPrices;
+    private List<BrinkPriceVariantWithCountry> productVariantPrices;
     private String productVariantId;
     private String storeGroupId;
 
@@ -31,7 +31,7 @@ public record BrinkPriceVariantListRequest(
     }
 
     public BrinkPriceVariantListRequestBuilder withProductVariantPrices(
-        final List<BrinkPriceVariant> productVariantPrices) {
+        final List<BrinkPriceVariantWithCountry> productVariantPrices) {
       this.productVariantPrices = productVariantPrices;
       return this;
     }
@@ -48,8 +48,8 @@ public record BrinkPriceVariantListRequest(
       return this;
     }
 
-    public BrinkPriceVariantListRequest build() {
-      return new BrinkPriceVariantListRequest(this);
+    public BrinkPriceVariantPutRequest build() {
+      return new BrinkPriceVariantPutRequest(this);
     }
 
 

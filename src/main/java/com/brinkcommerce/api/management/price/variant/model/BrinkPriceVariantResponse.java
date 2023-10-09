@@ -12,7 +12,8 @@ public record BrinkPriceVariantResponse(
   long discountAmount,
   String storeName,
   String currencyCode,
-  Instant updated
+  Instant updated,
+  Long referencePriceAmount
 ) {
 
 }
