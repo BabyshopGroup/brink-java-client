@@ -97,7 +97,7 @@ class BrinkCommerceShopperApiTest {
                     true,
                     "BABYSHOP",
                     "SE",
-                    List.of(new BrinkProductVariantPrice(1100L, 1000L, 100L, 200L, 2500L, 2L, "id")),
+                    List.of(new BrinkProductVariantPrice(1100L, 1000L, 100L, 100L, 200L, 2500L, 2L, "id")),
                     "id",
                     "SEK"
                 )

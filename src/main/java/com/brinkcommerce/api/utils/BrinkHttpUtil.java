@@ -3,9 +3,7 @@ package com.brinkcommerce.api.utils;
 import com.brinkcommerce.api.common.BrinkHttpErrorMessage;
 import com.brinkcommerce.api.configuration.BrinkHttpCode;
 import com.brinkcommerce.api.exception.BrinkIntegrationException;
-import com.brinkcommerce.api.management.discount.BrinkDiscount;
 import com.brinkcommerce.api.management.price.addon.AddonRequest;
-import com.brinkcommerce.api.management.price.variant.model.BrinkPriceVariantDeleteRequest;
 import com.brinkcommerce.api.management.price.variant.model.VariantRequest;
 import com.brinkcommerce.api.management.store.market.BrinkStoreMarket;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -67,16 +65,6 @@ public class BrinkHttpUtil {
           errorMessage.requestId(),
           BrinkHttpCode.fromHttpCode(response.statusCode()));
     }
-  }
-
-  public static String buildURI(final BrinkPriceVariantDeleteRequest request, final String baseUrl) {
-    return new StringBuilder()
-        .append(String.format("%s/", baseUrl))
-        .append(String.format("store-groups/%s/", request.storeGroupId()))
-        .append(String.format("markets/%s/", request.countryCode()))
-        .append(String.format("product-variants/%s/", request.productVariantId()))
-        .append("price")
-        .toString();
   }
 
   @Deprecated
