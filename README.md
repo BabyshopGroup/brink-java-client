@@ -1,12 +1,9 @@
-# Brink Commerce Java Client Library
+# Brink Commerce Java Client
 
-An unofficial open-source Java client for [Brink Commerce](brinkcommerce.com). The client mirrors the
+An unofficial open-source Java client for [Brink Commerce](https://brinkcommerce.com). The client mirrors the
 HTTP API and uses `java.net.http` for communication, no additional logic has
 been added to the API. **Java 17 is required**. The official documentation can be
 found [here](https://docs.brinkcommerce.com).
-
-Feel free to contribute to this project!
-
 
 ## Content
 
@@ -16,13 +13,10 @@ Feel free to contribute to this project!
 
 ## Dependency
 
-This Java Client is available on Maven Central Repository, which means to can import the SDK as an artifact.
 
 ### Maven
 
-Add the following to your `pom.xml`:
-
-Dependency:
+Run `$ mvn install` and add the following to your `pom.xml`:
 
 ```xml
 
@@ -105,11 +99,7 @@ BrinkCommerce
     └── Stock
 ```
 
-
-
-
-![Brink Classes](docs/brink_uml.svg)
-
+<img src="docs/brink_uml.svg" alt="Image" width="50%">
 
 ### Product Parent
 

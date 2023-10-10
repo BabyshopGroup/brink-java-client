@@ -1,14 +1,10 @@
 package com.brinkcommerce.api.price;
 
-import static com.brinkcommerce.api.util.Mocks.getPriceVariantMarket;
-import static com.brinkcommerce.api.util.Mocks.getPriceVariantRequest;
-import static com.brinkcommerce.api.util.Mocks.mockPriceVariantList;
-import static com.brinkcommerce.api.util.Mocks.mockPriceVariantListResponse;
+import static com.brinkcommerce.api.util.Mocks.*;
 import static com.brinkcommerce.api.util.TestUtils.mockAuthenticationConfiguration;
 import static com.brinkcommerce.api.util.TestUtils.mockBrinkConfiguration;
 import static com.brinkcommerce.api.util.TestUtils.mockHttpResponse;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.argThat;
@@ -21,9 +17,9 @@ import com.brinkcommerce.api.configuration.BrinkAuthentication;
 import com.brinkcommerce.api.configuration.ManagementConfiguration;
 import com.brinkcommerce.api.management.price.BrinkPriceException;
 import com.brinkcommerce.api.management.price.variant.BrinkPriceVariantApi;
-import com.brinkcommerce.api.management.price.variant.model.BrinkPriceVariantListRequest;
+import com.brinkcommerce.api.management.price.variant.model.BrinkPriceVariantPatchRequest;
+import com.brinkcommerce.api.management.price.variant.model.BrinkPriceVariantPutRequest;
 import com.brinkcommerce.api.management.price.variant.model.BrinkPriceVariantListResponse;
-import com.brinkcommerce.api.management.price.variant.model.BrinkPriceVariantDeleteRequest;
 import com.brinkcommerce.api.management.price.variant.model.BrinkPriceVariantRequest;
 import java.io.IOException;
 import java.net.http.HttpClient;
@@ -62,7 +58,7 @@ public class PriceVariantTest {
 
   @Test
   void whenCreate_returnBrinkPriceVariant() throws IOException, InterruptedException {
-    final BrinkPriceVariantListRequest priceGroup = mockPriceVariantList();
+    final BrinkPriceVariantPutRequest priceGroup = mockPriceVariantPutRequest();
 
     final HttpResponse<String> httpResponse = mockHttpResponse(priceGroup, 200);
 
@@ -90,7 +86,7 @@ public class PriceVariantTest {
   @ValueSource(ints = {400, 500})
   void whenCreate_returnErrorStatusCode(final int statusCode)
       throws IOException, InterruptedException {
-    final BrinkPriceVariantListRequest priceGroup = mockPriceVariantList();
+    final BrinkPriceVariantPutRequest priceGroup = mockPriceVariantPutRequest();
 
     final BrinkHttpErrorMessage errorMessage = new BrinkHttpErrorMessage("0", "Error");
     final HttpResponse<String> httpResponse = mockHttpResponse(errorMessage, statusCode);
@@ -104,7 +100,7 @@ public class PriceVariantTest {
 
   @Test
   void whenCreate_throwsRuntime() throws IOException, InterruptedException {
-    final BrinkPriceVariantListRequest priceGroup = mockPriceVariantList();
+    final BrinkPriceVariantPutRequest priceGroup = mockPriceVariantPutRequest();
 
     when(httpClient.send(any(HttpRequest.class), any(BodyHandler.class)))
         .thenThrow(RuntimeException.class);
@@ -114,12 +110,72 @@ public class PriceVariantTest {
 
   @Test
   void whenCreateOnNullArgument_throwsNullPointer() {
-    final BrinkPriceVariantListRequest priceGroup = null;
+    final BrinkPriceVariantPutRequest priceGroup = null;
 
     assertThatThrownBy(() -> priceApi.create(priceGroup)).isInstanceOf(NullPointerException.class);
   }
 
   // -----------------------------------------------------------------------------------------------
+  @Test
+  void whenUpdate_returnBrinkPriceVariant() throws IOException, InterruptedException {
+    final BrinkPriceVariantPatchRequest priceGroup = mockPriceVariantPatchRequest();
+
+    final HttpResponse<String> httpResponse = mockHttpResponse(mockPriceVariantListResponse(), 200);
+
+    when(httpClient.send(any(HttpRequest.class), any(BodyHandler.class))).thenReturn(httpResponse);
+
+    assertThat(priceApi.update(priceGroup)).isEqualTo(mockPriceVariantListResponse());
+
+    verify(httpClient)
+        .send(
+            argThat(
+                x -> {
+                  assertThat(x.uri().toString())
+                      .isEqualTo(
+                          "http://mockserver.com/price/store-groups/BABYSHOP/product-variants/123654_100/prices");
+                  return true;
+                }),
+            argThat(
+                x -> {
+                  assertThat(x).isNotNull();
+                  return true;
+                }));
+  }
+
+  @ParameterizedTest()
+  @ValueSource(ints = {400, 500})
+  void whenUpdate_returnErrorStatusCode(final int statusCode)
+      throws IOException, InterruptedException {
+    final BrinkPriceVariantPatchRequest priceGroup = mockPriceVariantPatchRequest();
+
+    final BrinkHttpErrorMessage errorMessage = new BrinkHttpErrorMessage("0", "Error");
+    final HttpResponse<String> httpResponse = mockHttpResponse(errorMessage, statusCode);
+
+    when(httpClient.send(any(HttpRequest.class), any(BodyHandler.class))).thenReturn(httpResponse);
+
+    assertThatThrownBy(() -> priceApi.update(priceGroup))
+        .isInstanceOf(BrinkPriceException.class)
+        .hasMessageContaining(String.format("Http code: %d", statusCode));
+  }
+
+  @Test
+  void whenUpdate_throwsRuntime() throws IOException, InterruptedException {
+    final BrinkPriceVariantPatchRequest priceGroup = mockPriceVariantPatchRequest();
+
+    when(httpClient.send(any(HttpRequest.class), any(BodyHandler.class)))
+        .thenThrow(RuntimeException.class);
+
+    assertThatThrownBy(() -> priceApi.update(priceGroup)).isInstanceOf(BrinkPriceException.class);
+  }
+
+  @Test
+  void whenUpdateOnNullArgument_throwsNullPointer() {
+    final BrinkPriceVariantPatchRequest priceGroup = null;
+
+    assertThatThrownBy(() -> priceApi.update(priceGroup)).isInstanceOf(NullPointerException.class);
+  }
+
+  // ----------------------------------------------------------------------------------------------
 
   @Test
   void whenGet_returnBrinkPriceVariant() throws IOException, InterruptedException {
@@ -183,61 +239,9 @@ public class PriceVariantTest {
 
   // -----------------------------------------------------------------------------------------------
 
-  @Test
-  void whenDelete_returnNoContent() throws IOException, InterruptedException {
 
-    final BrinkPriceVariantDeleteRequest request = getPriceVariantMarket();
-    final HttpResponse<String> httpResponse = mockHttpResponse("", 204);
 
-    when(httpClient.send(any(HttpRequest.class), any(BodyHandler.class))).thenReturn(httpResponse);
 
-    assertThatCode(() -> priceApi.delete(request)).doesNotThrowAnyException();
 
-    verify(httpClient)
-        .send(
-            argThat(
-                x -> {
-                  assertThat(x.uri().toString())
-                      .isEqualTo(
-                          "http://mockserver.com/price/store-groups/BABYSHOP/markets/SE/product-variants/123654_100/price");
-                  return true;
-                }),
-            argThat(
-                x -> {
-                  assertThat(x).isNotNull();
-                  return true;
-                }));
-  }
 
-  @ParameterizedTest()
-  @ValueSource(ints = {400, 500})
-  void whenDelete_returnErrorStatusCode(final int statusCode)
-      throws IOException, InterruptedException {
-    final BrinkPriceVariantDeleteRequest request = getPriceVariantMarket();
-    final BrinkHttpErrorMessage errorMessage = new BrinkHttpErrorMessage("0", "Error");
-    final HttpResponse<String> httpResponse = mockHttpResponse(errorMessage, statusCode);
-
-    when(httpClient.send(any(HttpRequest.class), any(BodyHandler.class))).thenReturn(httpResponse);
-
-    assertThatThrownBy(() -> priceApi.delete(request))
-        .isInstanceOf(BrinkPriceException.class)
-        .hasMessageContaining(String.format("Http code: %d", statusCode));
-  }
-
-  @Test
-  void whenDelete_throwsRuntime() throws IOException, InterruptedException {
-    final BrinkPriceVariantDeleteRequest request = getPriceVariantMarket();
-
-    when(httpClient.send(any(HttpRequest.class), any(BodyHandler.class)))
-        .thenThrow(RuntimeException.class);
-
-    assertThatThrownBy(() -> priceApi.delete(request)).isInstanceOf(BrinkPriceException.class);
-  }
-
-  @Test
-  void whenDeleteOnNullArgument_throwsNullPointer() {
-    final BrinkPriceVariantDeleteRequest request = null;
-
-    assertThatThrownBy(() -> priceApi.delete(request)).isInstanceOf(NullPointerException.class);
-  }
 }

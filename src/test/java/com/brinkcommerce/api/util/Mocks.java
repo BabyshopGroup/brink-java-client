@@ -2,12 +2,7 @@ package com.brinkcommerce.api.util;
 
 import com.brinkcommerce.api.management.price.addon.BrinkPriceAddon;
 import com.brinkcommerce.api.management.price.addon.BrinkPriceAddonRequest;
-import com.brinkcommerce.api.management.price.variant.model.BrinkPriceVariant;
-import com.brinkcommerce.api.management.price.variant.model.BrinkPriceVariantListRequest;
-import com.brinkcommerce.api.management.price.variant.model.BrinkPriceVariantListResponse;
-import com.brinkcommerce.api.management.price.variant.model.BrinkPriceVariantDeleteRequest;
-import com.brinkcommerce.api.management.price.variant.model.BrinkPriceVariantRequest;
-import com.brinkcommerce.api.management.price.variant.model.BrinkPriceVariantResponse;
+import com.brinkcommerce.api.management.price.variant.model.*;
 import com.brinkcommerce.api.management.product.addon.BrinkProductAddon;
 import com.brinkcommerce.api.management.product.parent.BrinkProductParent;
 import com.brinkcommerce.api.management.product.parent.BrinkProductParentAddon;
@@ -21,7 +16,6 @@ import com.brinkcommerce.api.management.stock.productvariants.BrinkProductVarian
 import com.brinkcommerce.api.management.stock.storegroups.BrinkStoreGroupMarketInventories;
 import com.brinkcommerce.api.management.stock.storegroups.BrinkStoreGroupMarketInventory;
 import com.brinkcommerce.api.management.stock.storegroups.BrinkStoreGroupMarketInventoryAddress;
-import com.brinkcommerce.api.management.stock.storegroups.BrinkStoreGroupMarketInventoryAddressAddress;
 import com.brinkcommerce.api.management.stock.storegroups.BrinkStoreGroupMarketInventoryIds;
 import com.brinkcommerce.api.management.store.BrinkCountryCode;
 import com.brinkcommerce.api.management.store.BrinkCurrencyCode;
@@ -69,16 +63,31 @@ public class Mocks {
         .build();
   }
 
-  public static BrinkPriceVariantListRequest mockPriceVariantList() {
-    return BrinkPriceVariantListRequest.builder()
+  public static BrinkPriceVariantPutRequest mockPriceVariantPutRequest() {
+    return BrinkPriceVariantPutRequest.builder()
         .withProductVariantId("123654_100")
-        .withProductVariantPrices(List.of(BrinkPriceVariant.builder()
+        .withProductVariantPrices(List.of(BrinkPriceVariantWithCountry.builder()
             .withCountryCode(BrinkCountryCode.SE)
             .withSalePriceAmount(100L)
             .withBasePriceAmount(80L)
+                .withReferencePriceAmount(80L)
             .build()))
         .withStoreGroupId("BABYSHOP")
         .build();
+  }
+
+  public static BrinkPriceVariantPatchRequest mockPriceVariantPatchRequest() {
+    return BrinkPriceVariantPatchRequest.builder()
+        .withProductVariantId("123654_100")
+        .withStoreGroupId("BABYSHOP")
+        .withProductVariantPrices(Map.of(
+            BrinkCountryCode.SE,
+            BrinkPriceVariant.builder()
+                .withSalePriceAmount(100L)
+                .withBasePriceAmount(90L)
+                .withReferencePriceAmount(80L)
+                .build())
+        ).build();
   }
 
   public static BrinkPriceVariantListResponse mockPriceVariantListResponse() {
@@ -93,16 +102,13 @@ public class Mocks {
             0L,
             null,
             null,
-            null))
+            null,
+            80L))
     );
   }
 
   public static BrinkPriceVariantRequest getPriceVariantRequest() {
     return new BrinkPriceVariantRequest("BABYSHOP", "123654_100");
-  }
-
-  public static BrinkPriceVariantDeleteRequest getPriceVariantMarket() {
-    return new BrinkPriceVariantDeleteRequest("BABYSHOP", BrinkCountryCode.SE, "123654_100");
   }
 
   public static BrinkPriceAddonRequest getPriceAddonRequest() {
