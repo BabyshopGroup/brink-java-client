@@ -4,9 +4,9 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>dev.yacc</groupId>
-  <artifactId>brink-commerce-client</artifactId>
-  <version>1.0.1</version>
+  <groupId>com.babyshop</groupId>
+  <artifactId>brink-commerce-client-v2</artifactId>
+  <version>local</version>
   <name>brink-commerce-api</name>
   <description>A small Java Client for Brink Commerce APIs</description>
 
@@ -16,6 +16,7 @@
     <java.version>17</java.version>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
+    <gpg.keyname>0x4A135A10</gpg.keyname>
   </properties>
 
   <dependencies>
