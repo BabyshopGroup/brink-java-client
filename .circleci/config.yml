@@ -1,0 +1,39 @@
+executors:
+  my-executor-java:
+    docker:
+      - image: cimg/openjdk:17.0.1
+
+version: 2.1
+jobs:
+  java-build-deploy:
+    executor: my-executor-java
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            # when lock file changes, use increasingly general patterns to restore cache
+            - maven-repo-v1-{{ .Branch }}-{{ checksum "java/pom.xml" }}
+            - maven-repo-v1-{{ .Branch }}-
+            - maven-repo-v1-
+      - run:
+          name: Configure credentials and maven build
+          command: |
+            mvn versions:set -DnewVersion=${CIRCLE_TAG//v}
+            mvn -s settings.xml deploy -e
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: maven-repo-v1-{{ .Branch }}-{{ checksum "java/pom.xml" }}
+
+workflows:
+  build-and-deploy-java:
+    jobs:
+      - java-build-deploy:
+          context: github
+          filters:
+            tags:
+              only:
+                - /^v[0-9]+(\.[0-9]+)+(\.[0-9]+)+(-beta\.[0-9]+$)/
+                - /^v[0-9]+(\.[0-9]+)+(\.[0-9]+$)/
+            branches:
+              ignore: /.*/
