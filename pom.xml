@@ -16,6 +16,7 @@
     <java.version>17</java.version>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
+    <gpg.keyname>0x4A135A10</gpg.keyname>
   </properties>
 
   <dependencies>
