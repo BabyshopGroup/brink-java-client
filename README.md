@@ -13,7 +13,6 @@ found [here](https://docs.brinkcommerce.com).
 
 ## Dependency
 
-
 ### Maven
 
 Run `$ mvn install` and add the following to your `pom.xml`:
