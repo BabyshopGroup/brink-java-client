@@ -6,7 +6,7 @@
 
   <groupId>com.babyshop</groupId>
   <artifactId>brink-commerce-client</artifactId>
-  <version>1.0.1</version>
+  <version>local</version>
   <name>brink-commerce-api</name>
   <description>A small Java Client for Brink Commerce APIs</description>
 
@@ -92,7 +92,7 @@
     <repository>
       <id>github</id>
       <name>GitHub babyshopgroup Apache Maven Packages</name>
-      <url>https://maven.pkg.github.com/babyshopgroup/brink-java-client</url>
+      <url>https://maven.pkg.github.com/babyshopgroup/brink-java-client-v2</url>
     </repository>
   </distributionManagement>
 
