@@ -25,6 +25,7 @@ import com.brinkcommerce.api.management.store.storegroup.BrinkStoreGroup;
 import com.brinkcommerce.api.management.tax.market.BrinkTaxMarket;
 import com.brinkcommerce.api.management.tax.taxgroup.BrinkTaxGroup;
 import java.time.Instant;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -89,8 +90,17 @@ public class Mocks {
                 .build())
         ).build();
   }
+  public static BrinkPriceVariantPatchRequest mockEmptyPriceVariantPatchRequest() {
+    Map<BrinkCountryCode, BrinkPriceVariant> myMap = new HashMap<>();
+    myMap.put(BrinkCountryCode.SE, null);
+    myMap.put(BrinkCountryCode.NO, null);
+    return BrinkPriceVariantPatchRequest.builder()
+        .withProductVariantId("123654_100")
+        .withStoreGroupId("BABYSHOP")
+        .withProductVariantPrices(myMap).build();
+  }
 
-  public static BrinkPriceVariantListResponse mockPriceVariantListResponse() {
+    public static BrinkPriceVariantListResponse mockPriceVariantListResponse() {
     return new BrinkPriceVariantListResponse(List.of(
         new BrinkPriceVariantResponse(
             80L,
@@ -107,6 +117,10 @@ public class Mocks {
     );
   }
 
+
+  public static BrinkPriceVariantListResponse mockEmptyPriceVariantListResponse() {
+    return new BrinkPriceVariantListResponse(List.of());
+  }
   public static BrinkPriceVariantRequest getPriceVariantRequest() {
     return new BrinkPriceVariantRequest("BABYSHOP", "123654_100");
   }

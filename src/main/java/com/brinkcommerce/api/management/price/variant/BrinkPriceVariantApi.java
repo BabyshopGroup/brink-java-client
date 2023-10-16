@@ -14,12 +14,14 @@ import com.brinkcommerce.api.management.price.variant.model.BrinkPriceVariantPut
 import com.brinkcommerce.api.management.price.variant.model.BrinkPriceVariantListResponse;
 import com.brinkcommerce.api.management.price.variant.model.BrinkPriceVariantRequest;
 import com.brinkcommerce.api.utils.BrinkHttpUtil;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Map;
 import java.util.Objects;
 
 public class BrinkPriceVariantApi {
