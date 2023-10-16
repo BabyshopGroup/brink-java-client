@@ -1,10 +1,12 @@
 package com.brinkcommerce.api.management.price.variant.model;
 
 import com.brinkcommerce.api.management.store.BrinkCountryCode;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.Map;
 
 public record BrinkPriceVariantPatchRequest(
+    @JsonInclude(JsonInclude.Include.ALWAYS) //Required to be included in Map to enable deletion of markets
     Map<BrinkCountryCode, BrinkPriceVariant> productVariantPrices,
     String productVariantId,
     String storeGroupId) implements VariantRequest {

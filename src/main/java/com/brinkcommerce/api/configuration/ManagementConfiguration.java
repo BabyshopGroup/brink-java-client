@@ -10,6 +10,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpClient.Redirect;
 import java.net.http.HttpClient.Version;
 import java.time.Duration;
+import java.util.Map;
 import java.util.Objects;
 
 public record ManagementConfiguration(
@@ -47,7 +48,7 @@ public record ManagementConfiguration(
   }
 
   private static ObjectMapper newObjectMapper() {
-    return new ObjectMapper()
+     return new ObjectMapper()
           .registerModule(new JavaTimeModule())
           .enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT)
           .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
