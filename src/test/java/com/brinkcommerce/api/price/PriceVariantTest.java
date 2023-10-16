@@ -142,7 +142,33 @@ public class PriceVariantTest {
                 }));
   }
 
-  @ParameterizedTest()
+  @Test
+  void whenUpdate_returnEmptyBrinkPriceVariant() throws IOException, InterruptedException {
+    final BrinkPriceVariantPatchRequest priceGroup = mockEmptyPriceVariantPatchRequest();
+
+    final HttpResponse<String> httpResponse = mockHttpResponse(mockEmptyPriceVariantListResponse(), 200);
+
+    when(httpClient.send(any(HttpRequest.class), any(BodyHandler.class))).thenReturn(httpResponse);
+
+    assertThat(priceApi.update(priceGroup)).isEqualTo(mockEmptyPriceVariantListResponse());
+
+    verify(httpClient)
+        .send(
+            argThat(
+                x -> {
+                  assertThat(x.uri().toString())
+                      .isEqualTo(
+                          "http://mockserver.com/price/store-groups/BABYSHOP/product-variants/123654_100/prices");
+                  return true;
+                }),
+            argThat(
+                x -> {
+                  assertThat(x).isNotNull();
+                  return true;
+                }));
+  }
+
+    @ParameterizedTest()
   @ValueSource(ints = {400, 500})
   void whenUpdate_returnErrorStatusCode(final int statusCode)
       throws IOException, InterruptedException {
