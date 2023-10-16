@@ -123,7 +123,7 @@ public class BrinkPriceVariantApi {
                       this.priceVariantUrl.toString())),
               this.authenticationHandler.getToken(),
               this.authenticationHandler.getApiKey())
-              .PUT(
+              .method("PATCH",
                   HttpRequest.BodyPublishers.ofString(
                       this.mapper.writeValueAsString(brinkPriceVariantPatchRequest)))
               .header(CONTENT_TYPE, APPLICATION_JSON)
