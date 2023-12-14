@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import com.brinkcommerce.api.configuration.ManagementConfiguration;
 import com.brinkcommerce.api.exception.BrinkIntegrationException;
+import com.brinkcommerce.api.shopper.BrinkShopperRequest;
 import com.brinkcommerce.api.shopper.ShopperConfiguration;
 import com.brinkcommerce.api.utils.BrinkHttpUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,6 +13,9 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class ShopperStockApi {
@@ -45,20 +49,14 @@ public class ShopperStockApi {
    * Get stock level. HTTP method: GET. URI:
    * /stocks/product-parents/{productParentId}/store-groups/{storeGroupId}/markets/{countryCode}.
    *
-   * @param productParentId id of product parent
-   * @param storeGroupId id of store group
-   * @param countryCode code for given market
+   * @param request BrinkShopperRequest
    * @return List<BrinkProductParentStock> list of stock levels
    * @throws BrinkStocksException if an error occurs
    */
   public BrinkProductParentStock get(
-      final String productParentId, final String storeGroupId, final String countryCode) {
-    Objects.requireNonNull(productParentId, "Product parent id cannot be null.");
-    Objects.requireNonNull(storeGroupId, "Store group id cannot be null.");
-    Objects.requireNonNull(countryCode, "Country code variant cannot be null.");
-
+          final BrinkShopperRequest request) {
     try {
-      final HttpRequest httpRequest =
+      HttpRequest.Builder requestBuilder =
           HttpRequest.newBuilder()
               .uri(
                   URI.create(
@@ -67,32 +65,49 @@ public class ShopperStockApi {
                           this.stocksUrl.toString(),
                           STOCKS_PATH,
                           PRODUCT_PARENT_PATH,
-                          productParentId,
+                          request.productParentId(),
                           STORE_GROUP_PATH,
-                          storeGroupId,
+                          request.storeGroupId(),
                           MARKET_PATH,
-                          countryCode)))
-              .GET()
-              .build();
+                          request.countryCode())))
+              .GET();
 
-      final HttpResponse<String> response = makeRequest(httpRequest);
+      for(Map.Entry<String, String> entry : request.headers().entrySet()) {
+        requestBuilder = requestBuilder.header(entry.getKey(), entry.getValue());
+      }
+
+      final HttpResponse<String> response = makeRequest(requestBuilder.build());
 
       return (BrinkProductParentStock)
           this.httpUtil.handleResponse(response, BrinkProductParentStock.class);
     } catch (final InterruptedException ie) {
       Thread.currentThread().interrupt();
       throw new BrinkStocksException(
-          String.format(ERROR_MESSAGE, productParentId, storeGroupId, countryCode), ie, null);
+          String.format(ERROR_MESSAGE, request.productParentId(), request.storeGroupId(), request.countryCode()), ie, null);
     } catch (final BrinkIntegrationException e) {
       throw new BrinkStocksException(
-          String.format(ERROR_MESSAGE, productParentId, storeGroupId, countryCode),
+          String.format(ERROR_MESSAGE, request.productParentId(), request.storeGroupId(), request.countryCode()),
           e,
           e.brinkHttpCode(),
           e.requestId());
     } catch (final Exception e) {
       throw new BrinkStocksException(
-          String.format(ERROR_MESSAGE, productParentId, storeGroupId, countryCode), e, null);
+          String.format(ERROR_MESSAGE, request.productParentId(), request.storeGroupId(), request.countryCode()), e, null);
     }
+  }
+
+  private URI buildURI(final BrinkShopperRequest request) {
+    return URI.create(
+            String.format(
+                    "%s/%s/%s/%s/%s/%s/%s/%s",
+                    this.stocksUrl.toString(),
+                    STOCKS_PATH,
+                    PRODUCT_PARENT_PATH,
+                    request.productParentId(),
+                    STORE_GROUP_PATH,
+                    request.storeGroupId(),
+                    MARKET_PATH,
+                    request.countryCode()));
   }
 
   private HttpResponse<String> makeRequest(final HttpRequest request)
