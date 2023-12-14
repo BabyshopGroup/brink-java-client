@@ -96,20 +96,6 @@ public class ShopperStockApi {
     }
   }
 
-  private URI buildURI(final BrinkShopperRequest request) {
-    return URI.create(
-            String.format(
-                    "%s/%s/%s/%s/%s/%s/%s/%s",
-                    this.stocksUrl.toString(),
-                    STOCKS_PATH,
-                    PRODUCT_PARENT_PATH,
-                    request.productParentId(),
-                    STORE_GROUP_PATH,
-                    request.storeGroupId(),
-                    MARKET_PATH,
-                    request.countryCode()));
-  }
-
   private HttpResponse<String> makeRequest(final HttpRequest request)
       throws IOException, InterruptedException {
     return this.client.send(request, HttpResponse.BodyHandlers.ofString());
