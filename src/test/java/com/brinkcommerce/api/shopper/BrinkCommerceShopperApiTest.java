@@ -38,6 +38,12 @@ class BrinkCommerceShopperApiTest {
   private static final String MARKET = "SE";
   private static final String STORE_GROUP_ID = "BABYSHOP";
 
+  private static final BrinkShopperRequest REQUEST = BrinkShopperRequest.builder()
+          .withProductParentId(PRODUCT_ID)
+          .withStoreGroupId(STORE_GROUP_ID)
+          .withCountryCode(MARKET)
+          .build();
+
   @Mock private HttpClient httpClient;
 
   private BrinkShopper api;
@@ -63,7 +69,7 @@ class BrinkCommerceShopperApiTest {
         .thenReturn(httpResponse);
 
     final BrinkProductParentStock response =
-        this.api.stocks().get(PRODUCT_ID, STORE_GROUP_ID, MARKET);
+        this.api.stocks().get(REQUEST);
 
     verify(this.httpClient, times(1))
         .send(any(HttpRequest.class), any(HttpResponse.BodyHandler.class));
@@ -108,7 +114,7 @@ class BrinkCommerceShopperApiTest {
         .thenReturn(httpResponse);
 
     final BrinkProductParentPrices response =
-        this.api.prices().get(PRODUCT_ID, STORE_GROUP_ID, MARKET);
+        this.api.prices().get(REQUEST);
 
     verify(this.httpClient, times(1))
         .send(any(HttpRequest.class), any(HttpResponse.BodyHandler.class));
@@ -140,7 +146,7 @@ class BrinkCommerceShopperApiTest {
 
     assertThrows(
         BrinkStocksException.class,
-        () -> this.api.stocks().get(PRODUCT_ID, STORE_GROUP_ID, MARKET));
+        () -> this.api.stocks().get(REQUEST));
 
     verify(this.httpClient, times(1))
         .send(any(HttpRequest.class), any(HttpResponse.BodyHandler.class));
@@ -170,7 +176,7 @@ class BrinkCommerceShopperApiTest {
 
     assertThrows(
         BrinkPricesException.class,
-        () -> this.api.prices().get(PRODUCT_ID, STORE_GROUP_ID, MARKET));
+        () -> this.api.prices().get(REQUEST));
 
     verify(this.httpClient, times(1))
         .send(any(HttpRequest.class), any(HttpResponse.BodyHandler.class));
