@@ -2,6 +2,7 @@ package com.brinkcommerce.api.shopper.prices;
 
 import static java.util.Objects.requireNonNull;
 import com.brinkcommerce.api.exception.BrinkIntegrationException;
+import com.brinkcommerce.api.shopper.BrinkShopperRequest;
 import com.brinkcommerce.api.shopper.ShopperConfiguration;
 import com.brinkcommerce.api.utils.BrinkHttpUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -10,6 +11,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Map;
 import java.util.Objects;
 
 public class ShopperPriceApi {
@@ -40,13 +42,10 @@ public class ShopperPriceApi {
   }
 
   public BrinkProductParentPrices get(
-      final String productParentId, final String storeGroupId, final String countryCode) {
-    Objects.requireNonNull(productParentId, "Product parent id cannot be null.");
-    Objects.requireNonNull(storeGroupId, "Store group id cannot be null.");
-    Objects.requireNonNull(countryCode, "Country code variant cannot be null.");
+          final BrinkShopperRequest request) {
 
     try {
-      final HttpRequest httpRequest =
+      HttpRequest.Builder requestBuilder =
           HttpRequest.newBuilder()
               .uri(
                   URI.create(
@@ -55,31 +54,34 @@ public class ShopperPriceApi {
                           this.pricesUrl.toString(),
                           PRICES_PATH,
                           PRODUCT_PARENT_PATH,
-                          productParentId,
+                          request.productParentId(),
                           STORE_GROUP_PATH,
-                          storeGroupId,
+                          request.storeGroupId(),
                           MARKET_PATH,
-                          countryCode)))
-              .GET()
-              .build();
+                          request.countryCode())))
+              .GET();
 
-      final HttpResponse<String> response = makeRequest(httpRequest);
+      for(Map.Entry<String, String> entry : request.headers().entrySet()) {
+        requestBuilder = requestBuilder.header(entry.getKey(), entry.getValue());
+      }
+
+      final HttpResponse<String> response = makeRequest(requestBuilder.build());
 
       return (BrinkProductParentPrices)
           this.httpUtil.handleResponse(response, BrinkProductParentPrices.class);
     } catch (final InterruptedException ie) {
       Thread.currentThread().interrupt();
       throw new BrinkPricesException(
-          String.format(ERROR_MESSAGE, productParentId, storeGroupId, countryCode), ie, null);
+          String.format(ERROR_MESSAGE, request.productParentId(), request.storeGroupId(), request.countryCode()), ie, null);
     } catch (final BrinkIntegrationException e) {
       throw new BrinkPricesException(
-          String.format(ERROR_MESSAGE, productParentId, storeGroupId, countryCode),
+          String.format(ERROR_MESSAGE, request.productParentId(), request.storeGroupId(), request.countryCode()),
           e,
           e.brinkHttpCode(),
           e.requestId());
     } catch (final Exception e) {
       throw new BrinkPricesException(
-          String.format(ERROR_MESSAGE, productParentId, storeGroupId, countryCode), e, null);
+          String.format(ERROR_MESSAGE, request.productParentId(), request.storeGroupId(), request.countryCode()), e, null);
     }
   }
 

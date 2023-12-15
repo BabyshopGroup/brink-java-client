@@ -1,6 +1,5 @@
 package com.brinkcommerce.api.shopper;
 
-import com.brinkcommerce.api.configuration.BrinkMgmtConfigBuilder;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -50,7 +49,41 @@ public record ShopperConfiguration(
           .setSerializationInclusion(JsonInclude.Include.NON_NULL);
   }
 
-  public static BrinkMgmtConfigBuilder builder() {
-    return BrinkMgmtConfigBuilder.create();
+  public static Builder builder() {
+    return new Builder();
+  }
+
+  public static final class Builder {
+    private String host;
+    private ObjectMapper mapper;
+    private HttpClient httpClient;
+    private Integer timeoutInSeconds;
+
+    private Builder() {
+    }
+
+    public Builder withHost(final String host) {
+      this.host = host;
+      return this;
+    }
+
+    public Builder withMapper(final ObjectMapper mapper) {
+      this.mapper = mapper;
+      return this;
+    }
+
+    public Builder withTimeout(final Integer timeoutInSeconds) {
+      this.timeoutInSeconds = timeoutInSeconds;
+      return this;
+    }
+
+    public Builder withHttpClient(final HttpClient httpClient) {
+      this.httpClient = httpClient;
+      return this;
+    }
+
+    public ShopperConfiguration build() {
+      return of(host, timeoutInSeconds, mapper, httpClient);
+    }
   }
 }
