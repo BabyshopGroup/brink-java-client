@@ -13,10 +13,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.brinkcommerce.api.configuration.BrinkAuthentication;
-import com.brinkcommerce.api.shopper.prices.BrinkPricesException;
-import com.brinkcommerce.api.shopper.prices.BrinkProductParentPrices;
-import com.brinkcommerce.api.shopper.prices.BrinkProductParentPricesProductParent;
-import com.brinkcommerce.api.shopper.prices.BrinkProductVariantPrice;
+import com.brinkcommerce.api.shopper.prices.*;
 import com.brinkcommerce.api.shopper.stocks.BrinkProductParentStock;
 import com.brinkcommerce.api.shopper.stocks.BrinkProductParentStockProductParent;
 import com.brinkcommerce.api.shopper.stocks.BrinkStocksException;
@@ -24,6 +21,7 @@ import java.io.IOException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.Instant;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -103,7 +101,7 @@ class BrinkCommerceShopperApiTest {
                     true,
                     "BABYSHOP",
                     "SE",
-                    List.of(new BrinkProductVariantPrice(1100L, 1000L, 100L, 100L, 200L, 2500L, 2L, "id")),
+                    List.of(new BrinkProductVariantPrice(1100L, 1000L, 100L, 100L, 200L, 2500L, 2L, new BrinkLowestPrice(100L, Instant.now()),"id")),
                     "id",
                     "SEK"
                 )
