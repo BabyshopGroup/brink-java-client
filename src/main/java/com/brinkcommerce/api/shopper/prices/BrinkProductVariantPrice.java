@@ -8,4 +8,5 @@ public record BrinkProductVariantPrice(
     Long taxAmount,
     Long taxPercentage,
     Long taxPercentageDecimals,
+    BrinkLowestPrice lowestPriceRecord,
     String id) {}
