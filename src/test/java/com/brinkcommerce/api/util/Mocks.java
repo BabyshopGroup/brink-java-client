@@ -410,7 +410,8 @@ public class Mocks {
         productVariant.customAttributes(),
         productVariant.tags(),
         productVariant.weight(),
-        productVariant.dimensions());
+        productVariant.dimensions(),
+        productVariant.shippingAttributes());
   }
 
   private static BrinkProductAddon getBrinkProductAddon(final BrinkProductAddon productAddon) {
