@@ -26,6 +26,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandler;
+import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -139,6 +140,7 @@ public class ProductVariantTest {
             .withWeight(55)
             .withDimensions(new BrinkDimensions(55, 55, 55))
             .withDescription("Babyshop for now.")
+            .withShippingAttributes(List.of("PHYSICAL"))
             .build();
 
     final BrinkProductVariant responseProductVariant =
