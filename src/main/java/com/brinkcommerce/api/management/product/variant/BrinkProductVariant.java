@@ -21,7 +21,8 @@ public record BrinkProductVariant(
     Map<String, String> customAttributes,
     Map<String, List<String>> tags,
     Integer weight,
-    BrinkDimensions dimensions) {
+    BrinkDimensions dimensions,
+    List<String> shippingAttributes) {
 
   private BrinkProductVariant(final BrinkProductVariantBuilder builder) {
     this(
@@ -41,7 +42,8 @@ public record BrinkProductVariant(
         builder.customAttributes,
         builder.tags,
         builder.weight,
-        builder.dimensions
+        builder.dimensions,
+        builder.shippingAttributes
         );
   }
 
@@ -68,6 +70,7 @@ public record BrinkProductVariant(
     private Map<String, List<String>> tags;
     private Integer weight;
     private BrinkDimensions dimensions;
+    private List<String> shippingAttributes;
 
     public BrinkProductVariantBuilder() {
     }
@@ -159,6 +162,11 @@ public record BrinkProductVariant(
     public BrinkProductVariantBuilder withDimensions(
         final BrinkDimensions dimensions) {
       this.dimensions = dimensions;
+      return this;
+    }
+
+    public BrinkProductVariantBuilder withShippingAttributes(final List<String> shippingAttributes) {
+      this.shippingAttributes = shippingAttributes;
       return this;
     }
 
