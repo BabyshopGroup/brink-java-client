@@ -5,6 +5,7 @@ import com.brinkcommerce.api.configuration.ManagementConfiguration;
 import com.brinkcommerce.api.exception.BrinkIntegrationException;
 import com.brinkcommerce.api.management.order.delivery.model.request.BrinkDeliveryGetRequest;
 import com.brinkcommerce.api.management.order.delivery.model.request.BrinkDeliveryPostRequest;
+import com.brinkcommerce.api.management.order.delivery.model.request.BrinkDeliveryStartRequest;
 import com.brinkcommerce.api.management.order.delivery.model.response.BrinkDeliveryGetResponse;
 import com.brinkcommerce.api.management.order.delivery.model.response.BrinkDeliveryPostResponse;
 import com.brinkcommerce.api.utils.BrinkHttpUtil;
@@ -128,11 +129,11 @@ public class BrinkDeliveryApi {
     }
 
     public void start(
-            final String deliveryId
-    ) {
+            final BrinkDeliveryStartRequest request
+            ) {
         final String uri = new StringBuilder()
                 .append("deliveries")
-                .append(String.format("%s/", deliveryId))
+                .append(String.format("%s/", request.deliveryId()))
                 .append("start")
                 .toString();
         final HttpRequest httpRequest = httpRequestBuilderWithAuthentication(
@@ -149,12 +150,12 @@ public class BrinkDeliveryApi {
         } catch (final InterruptedException ie) {
             Thread.currentThread().interrupt();
             throw new BrinkDeliveryException(
-                    String.format("Failed to start delivery with delivery-id %s.", deliveryId),
+                    String.format("Failed to start delivery with delivery-id %s.", request.deliveryId()),
                     ie,
                     null);
         } catch (final BrinkIntegrationException e) {
             throw new BrinkDeliveryException(
-                    String.format("Failed to start delivery with delivery-id %s.", deliveryId),
+                    String.format("Failed to start delivery with delivery-id %s.", request.deliveryId()),
                     e,
                     e.brinkHttpCode(),
                     e.requestId());
