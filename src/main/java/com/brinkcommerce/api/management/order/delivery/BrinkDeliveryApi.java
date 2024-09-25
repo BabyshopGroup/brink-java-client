@@ -161,7 +161,7 @@ public class BrinkDeliveryApi {
                     e.requestId());
         } catch (final Exception e) {
             throw new BrinkDeliveryException(
-                    String.format("Failed to start delivery with delivery-id %s.", deliveryId),
+                    String.format("Failed to start delivery with delivery-id %s.", request.deliveryId()),
                     e,
                     null);
         }
