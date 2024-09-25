@@ -51,11 +51,16 @@ public class BrinkDeliveryApi {
             final BrinkDeliveryPostRequest request
     ) {
         Objects.requireNonNull(request, "com.brinkcommerce.api.Brink Brink delivery post request cannot be null");
+        final String uri = new StringBuilder()
+                .append(String.format("%s/", this.orderUrl.toString()))
+                .append(String.format("%s/", request.orderId()))
+                .append("deliveries")
+                .toString();
 
         try {
             final HttpRequest httpRequest =
                     httpRequestBuilderWithAuthentication(
-                            URI.create(buildURI(request.orderId(), this.orderUrl.toString())),
+                            URI.create(uri),
                             this.authenticationHandler.getToken(),
                             this.authenticationHandler.getApiKey())
                             .POST(HttpRequest.BodyPublishers.ofString(this.mapper.writeValueAsString(request)))
@@ -85,9 +90,15 @@ public class BrinkDeliveryApi {
     public BrinkDeliveryGetResponse get(
             final BrinkDeliveryGetRequest request
     ) {
+        final String uri = new StringBuilder()
+                .append(String.format("%s/", this.orderUrl.toString()))
+                .append(String.format("%s/", request.deliveryId()))
+                .append("deliveries")
+                .toString();
+
         final HttpRequest httpRequest =
                 httpRequestBuilderWithAuthentication(
-                        URI.create(buildURI(request.deliveryId(), this.orderUrl.toString())),
+                        URI.create(uri),
                         this.authenticationHandler.getToken(),
                         this.authenticationHandler.getApiKey())
                         .GET()
@@ -116,15 +127,46 @@ public class BrinkDeliveryApi {
         }
     }
 
-    private HttpResponse<String> makeRequest(final HttpRequest request) throws IOException, InterruptedException {
-        return this.httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+    public void start(
+            final String deliveryId
+    ) {
+        final String uri = new StringBuilder()
+                .append("deliveries")
+                .append(String.format("%s/", deliveryId))
+                .append("start")
+                .toString();
+        final HttpRequest httpRequest = httpRequestBuilderWithAuthentication(
+                URI.create(uri),
+                this.authenticationHandler.getToken(),
+                this.authenticationHandler.getApiKey())
+                .POST(HttpRequest.BodyPublishers.noBody())
+                .header(ACCEPT, APPLICATION_JSON)
+                .header(CONTENT_TYPE, APPLICATION_JSON)
+                .build();
+        try {
+            final HttpResponse<String> response = makeRequest(httpRequest);
+            this.brinkHttpUtil.handleResponse(response, null);
+        } catch (final InterruptedException ie) {
+            Thread.currentThread().interrupt();
+            throw new BrinkDeliveryException(
+                    String.format("Failed to start delivery with delivery-id %s.", deliveryId),
+                    ie,
+                    null);
+        } catch (final BrinkIntegrationException e) {
+            throw new BrinkDeliveryException(
+                    String.format("Failed to start delivery with delivery-id %s.", deliveryId),
+                    e,
+                    e.brinkHttpCode(),
+                    e.requestId());
+        } catch (final Exception e) {
+            throw new BrinkDeliveryException(
+                    String.format("Failed to start delivery with delivery-id %s.", deliveryId),
+                    e,
+                    null);
+        }
     }
 
-    private String buildURI(final String id, final String baseUrl) {
-        return new StringBuilder()
-                .append(String.format("%s/", baseUrl))
-                .append(String.format("%s/", id))
-                .append("deliveries")
-                .toString();
+    private HttpResponse<String> makeRequest(final HttpRequest request) throws IOException, InterruptedException {
+        return this.httpClient.send(request, HttpResponse.BodyHandlers.ofString());
     }
 }
