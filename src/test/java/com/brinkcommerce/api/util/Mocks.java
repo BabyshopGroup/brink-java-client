@@ -1,12 +1,10 @@
 package com.brinkcommerce.api.util;
 
-import com.brinkcommerce.api.management.order.delivery.model.request.*;
+import com.brinkcommerce.api.management.order.delivery.model.request.BrinkDeliveryPostRequest;
 import com.brinkcommerce.api.management.order.delivery.model.request.Gift;
 import com.brinkcommerce.api.management.order.delivery.model.request.GiftCardProduct;
 import com.brinkcommerce.api.management.order.delivery.model.request.OrderLine;
 import com.brinkcommerce.api.management.order.delivery.model.response.*;
-import com.brinkcommerce.api.management.order.delivery.model.response.Bonus;
-import com.brinkcommerce.api.management.order.delivery.model.response.GiftCard;
 import com.brinkcommerce.api.management.price.addon.BrinkPriceAddon;
 import com.brinkcommerce.api.management.price.addon.BrinkPriceAddonRequest;
 import com.brinkcommerce.api.management.price.variant.model.*;
@@ -15,11 +13,11 @@ import com.brinkcommerce.api.management.product.parent.BrinkProductParent;
 import com.brinkcommerce.api.management.product.parent.BrinkProductParentAddon;
 import com.brinkcommerce.api.management.product.variant.BrinkDimensions;
 import com.brinkcommerce.api.management.product.variant.BrinkProductVariant;
+import com.brinkcommerce.api.management.stock.inventories.BrinkAddress;
 import com.brinkcommerce.api.management.stock.inventories.BrinkInventoriesInventories;
 import com.brinkcommerce.api.management.stock.inventories.BrinkInventory;
-import com.brinkcommerce.api.management.stock.inventories.BrinkAddress;
-import com.brinkcommerce.api.management.stock.productvariants.BrinkVariantInventory;
 import com.brinkcommerce.api.management.stock.productvariants.BrinkProductVariantStock;
+import com.brinkcommerce.api.management.stock.productvariants.BrinkVariantInventory;
 import com.brinkcommerce.api.management.stock.storegroups.BrinkStoreGroupMarketInventories;
 import com.brinkcommerce.api.management.stock.storegroups.BrinkStoreGroupMarketInventory;
 import com.brinkcommerce.api.management.stock.storegroups.BrinkStoreGroupMarketInventoryAddress;
@@ -32,9 +30,7 @@ import com.brinkcommerce.api.management.store.storegroup.BrinkStoreGroup;
 import com.brinkcommerce.api.management.tax.market.BrinkTaxMarket;
 import com.brinkcommerce.api.management.tax.taxgroup.BrinkTaxGroup;
 
-import java.sql.Array;
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

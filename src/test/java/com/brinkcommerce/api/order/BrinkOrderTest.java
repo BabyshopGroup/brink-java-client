@@ -1,15 +1,18 @@
 package com.brinkcommerce.api.order;
 
 import com.brinkcommerce.api.authentication.AuthenticationHandler;
+import com.brinkcommerce.api.common.BrinkHttpErrorMessage;
 import com.brinkcommerce.api.configuration.BrinkAuthentication;
 import com.brinkcommerce.api.configuration.ManagementConfiguration;
-import com.brinkcommerce.api.management.order.BrinkOrderApi;
 import com.brinkcommerce.api.management.order.delivery.BrinkDeliveryApi;
+import com.brinkcommerce.api.management.order.delivery.BrinkDeliveryException;
 import com.brinkcommerce.api.management.order.delivery.model.request.BrinkDeliveryPostRequest;
 import com.brinkcommerce.api.management.order.delivery.model.response.BrinkDeliveryPostResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -22,6 +25,7 @@ import static com.brinkcommerce.api.util.Mocks.mockOrderDeliveryPostRequest;
 import static com.brinkcommerce.api.util.Mocks.mockOrderDeliveryPostResponse;
 import static com.brinkcommerce.api.util.TestUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.verify;
@@ -76,6 +80,39 @@ public class BrinkOrderTest {
                                     assertThat(x).isNotNull();
                                     return true;
                                 }));
+    }
+
+    @Test
+    void whenCreate_throwsRuntime() throws IOException, InterruptedException {
+        final BrinkDeliveryPostRequest request = mockOrderDeliveryPostRequest();
+
+        when(httpClient.send(any(HttpRequest.class), any(HttpResponse.BodyHandler.class)))
+                .thenThrow(RuntimeException.class);
+
+        assertThatThrownBy(() -> sut.create(request)).isInstanceOf(BrinkDeliveryException.class);
+    }
+
+    @Test
+  void whenCreateOnNullArgument_throwsNullPointer() {
+    final BrinkDeliveryPostRequest request = null;
+
+    assertThatThrownBy(() -> sut.create(request)).isInstanceOf(NullPointerException.class);
+  }
+
+    @ParameterizedTest()
+    @ValueSource(ints = {400, 500})
+    void whenCreate_returnErrorStatusCode(final int statusCode)
+            throws IOException, InterruptedException {
+        final BrinkDeliveryPostRequest request = mockOrderDeliveryPostRequest();
+
+        final BrinkHttpErrorMessage errorMessage = new BrinkHttpErrorMessage("0", "Error");
+        final HttpResponse<String> httpResponse = mockHttpResponse(errorMessage, statusCode);
+
+        when(httpClient.send(any(HttpRequest.class), any(HttpResponse.BodyHandler.class))).thenReturn(httpResponse);
+
+        assertThatThrownBy(() -> sut.create(request))
+                .isInstanceOf(BrinkDeliveryException.class)
+                .hasMessageContaining(String.format("Http code: %d", statusCode));
     }
 
 }
