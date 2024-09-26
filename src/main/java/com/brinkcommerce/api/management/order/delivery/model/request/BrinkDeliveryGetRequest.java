@@ -5,7 +5,7 @@ public record BrinkDeliveryGetRequest(
 ) {
 
     private BrinkDeliveryGetRequest(final BrinkDeliveryGetRequestBuilder builder) {
-        this.deliveryId = builder.deliveryId;
+        this(builder.deliveryId);
     }
 
     public static BrinkDeliveryGetRequestBuilder builder() {

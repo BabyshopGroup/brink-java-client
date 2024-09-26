@@ -1,11 +1,8 @@
 package com.brinkcommerce.api.management.order.delivery.model.request;
 
-public record GiftCardProduct(
-        String giftCardProductId
-) {
-
+public record GiftCardProduct(String giftCardProductId) {
     private GiftCardProduct(final GiftCardProductBuilder builder) {
-        this.giftCardProductId = builder.giftCardProductId;
+        this(builder.giftCardProductId);
     }
 
     public static GiftCardProductBuilder builder() {
