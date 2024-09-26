@@ -22,13 +22,15 @@ import static com.brinkcommerce.api.utils.BrinkHttpUtil.*;
 
 public class BrinkDeliveryApi {
 
-    private static final String PATH = "orders";
+    private static final String ORDER_PATH = "orders";
+    private static final String DELIVERY_PATH = "deliveries";
 
     private final HttpClient httpClient;
     private final ObjectMapper mapper;
     private final AuthenticationHandler authenticationHandler;
     private final BrinkHttpUtil brinkHttpUtil;
     private final URI orderUrl;
+    private final URI deliveryPath;
 
     public BrinkDeliveryApi(
             final ManagementConfiguration config,
@@ -38,7 +40,8 @@ public class BrinkDeliveryApi {
         Objects.requireNonNull(config.host(), "Management Host URL cannot be null.");
         this.mapper = Objects.requireNonNull(config.mapper(), "ObjectMapper cannot be null.");
         this.httpClient = Objects.requireNonNull(config.httpClient(), "HttpClient cannot be null.");
-        this.orderUrl = URI.create(String.format("%s/%s", config.host(), PATH));
+        this.orderUrl = URI.create(String.format("%s/%s", config.host(), ORDER_PATH));
+        this.deliveryPath = URI.create(String.format("%s/%s", config.host(), DELIVERY_PATH));
         this.authenticationHandler = authenticationHandler;
         this.brinkHttpUtil = BrinkHttpUtil.create(this.mapper);
     }
@@ -132,7 +135,7 @@ public class BrinkDeliveryApi {
             final BrinkDeliveryStartRequest request
             ) {
         final String uri = new StringBuilder()
-                .append("deliveries")
+                .append(String.format("%s/", this.deliveryPath.toString()))
                 .append(String.format("%s/", request.deliveryId()))
                 .append("start")
                 .toString();
