@@ -18,7 +18,7 @@ public record BrinkDeliveryGetRequest(
         BrinkDeliveryGetRequestBuilder() {
         }
 
-        public BrinkDeliveryGetRequestBuilder deliveryId(String deliveryId) {
+        public BrinkDeliveryGetRequestBuilder withDeliveryId(String deliveryId) {
             this.deliveryId = deliveryId;
             return this;
         }

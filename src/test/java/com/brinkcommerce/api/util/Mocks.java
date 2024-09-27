@@ -1,9 +1,11 @@
 package com.brinkcommerce.api.util;
 
-import com.brinkcommerce.api.management.order.delivery.model.request.BrinkDeliveryPostRequest;
 import com.brinkcommerce.api.management.order.delivery.model.request.Gift;
 import com.brinkcommerce.api.management.order.delivery.model.request.GiftCardProduct;
 import com.brinkcommerce.api.management.order.delivery.model.request.OrderLine;
+import com.brinkcommerce.api.management.order.delivery.model.request.*;
+import com.brinkcommerce.api.management.order.delivery.model.response.Bonus;
+import com.brinkcommerce.api.management.order.delivery.model.response.GiftCard;
 import com.brinkcommerce.api.management.order.delivery.model.response.*;
 import com.brinkcommerce.api.management.price.addon.BrinkPriceAddon;
 import com.brinkcommerce.api.management.price.addon.BrinkPriceAddonRequest;
@@ -95,7 +97,7 @@ public class Mocks {
                                 0L,
                                 0L
                         )
-                        ),
+                ),
                 List.of(
                         new com.brinkcommerce.api.management.order.delivery.model.response.Gift("gift-id-1", 1)
                 ),
@@ -248,6 +250,157 @@ public class Mocks {
         );
     }
 
+    public static BrinkDeliveryGetRequest mockOrderDeliveryGetRequest() {
+        return BrinkDeliveryGetRequest.builder()
+                .withDeliveryId("delivery-id-1")
+                .build();
+    }
+
+    public static BrinkDeliveryGetResponse mockOrderDeliveryGetResponse() {
+        return new BrinkDeliveryGetResponse(
+                "delivery-id-1",
+                "order-id-1",
+                "order-reference-1",
+
+                List.of(
+                        ShippingProvider.withStatus(
+                                new ShippingProvider("shipping-provider-name-1", "shipping-provider-id-1"),
+                                "history-id-1",
+                                List.of(new History("history-id-1", "status-1", "message-1", "error-mesage", Instant.now()))
+                        )
+                ),
+                List.of(PaymentProvider.withStatus(
+                        new PaymentProvider(
+                                "payment-provider-name-1",
+                                "payment-provider-id-1"
+                        ),
+                        "history-id-1",
+                        List.of(new History("history-id-1", "status-1", "message-1", "error-mesage", Instant.now()))
+                )),
+                List.of(
+                        VoucherProvider.withStatus(
+                                new VoucherProvider("voucher-provider-name-1", "voucher-provider-id-1"),
+                                "history-id-1",
+                                List.of(new History("history-id-1", "status-1", "message-1", "error-mesage", Instant.now()))
+                        )
+                ),
+                List.of(
+                        GiftCardProvider.withStatus(
+                                new GiftCardProvider("gift-card-provider-name-1", "gift-card-provider-id-1"),
+                                "history-id-1",
+                                List.of(new History("history-id-1", "status-1", "message-1", "error-mesage", Instant.now()))
+                        )
+                ),
+                List.of(
+                        GiftCardProductProvider.withStatus(
+                                new GiftCardProductProvider("gift-card-product-provider-name-1", "gift-card-product-provider-id-1"),
+                                "history-id-1",
+                                List.of(new History("history-id-1", "status-1", "message-1", "error-mesage", Instant.now()))
+                        )
+                ),
+                List.of(
+                        PromotionProvider.withStatus(
+                                new PromotionProvider("promotion-provider-name-1", "promotion-provider-id-1"),
+                                "history-id-1",
+                                List.of(new History("history-id-1", "status-1", "message-1", "error-mesage", Instant.now()))
+                        )
+                ),
+                List.of(
+                        BonusProvider.withStatus(
+                                new BonusProvider("bonus-provider-name-1", "bonus-provider-id-1"),
+                                "history-id-1",
+                                List.of(new History("history-id-1", "status-1", "message-1", "error-mesage", Instant.now()))
+                        )
+                ),
+
+                List.of(
+                        new com.brinkcommerce.api.management.order.delivery.model.response.OrderLine(
+                                "order-line-id-1",
+                                1,
+                                0L,
+                                3,
+                                "SEK",
+                                0L,
+                                0L,
+                                0L
+                        )
+                ),
+                List.of(
+                        new ShippingFee(
+                                "shipping-fee-1",
+                                0L,
+                                3,
+                                "SEK",
+                                0L,
+                                0L,
+                                0L
+                        )
+                ),
+                List.of(
+                        new com.brinkcommerce.api.management.order.delivery.model.response.Gift("gift-id-1", 1)
+                ),
+                List.of(
+                        new GiftCard(
+                                "gift-card-id-1",
+                                0L,
+                                "SEK",
+                                "unknown string",
+                                "unknown string",
+                                "unknown string"
+                        )
+                ),
+                List.of(
+                        new com.brinkcommerce.api.management.order.delivery.model.response.GiftCardProduct(
+                                "gift-card-product-id-1",
+                                "SEK",
+                                0L,
+                                "unknown string",
+                                "unknown string",
+                                "unknown string",
+                                "create-id-1"
+                        )
+                ),
+                List.of(
+                        new Voucher(
+                                "voucher-id-1",
+                                10L,
+                                "SEK"
+                        )
+                ),
+
+                List.of(new Bonus(
+                        "bonus-id-1",
+                        "reservation-id-1",
+                        100L,
+                        "SEK"
+                )),
+                List.of(new Tracking(
+                        "tracking-id-1",
+                        "tracking-url-1",
+                        "shipping-method-1",
+                        "shipping-company-1"
+                )),
+                List.of(new CapturedPayment(
+                        "captured-payment-reference-1"
+                )),
+                List.of(new Totals(
+                        100L,
+                        0L,
+                        0L,
+                        0L,
+                        0L,
+                        0L
+                )),
+                Instant.now(),
+                Instant.now(),
+                Instant.now(),
+                Instant.now(),
+                1,
+                Instant.now(),
+                Instant.now(),
+                1
+        );
+    }
 
     public static BrinkPriceVariantListResponse mockEmptyPriceVariantListResponse() {
         return new BrinkPriceVariantListResponse(List.of());

@@ -6,7 +6,9 @@ import com.brinkcommerce.api.configuration.BrinkAuthentication;
 import com.brinkcommerce.api.configuration.ManagementConfiguration;
 import com.brinkcommerce.api.management.order.delivery.BrinkDeliveryApi;
 import com.brinkcommerce.api.management.order.delivery.BrinkDeliveryException;
+import com.brinkcommerce.api.management.order.delivery.model.request.BrinkDeliveryGetRequest;
 import com.brinkcommerce.api.management.order.delivery.model.request.BrinkDeliveryPostRequest;
+import com.brinkcommerce.api.management.order.delivery.model.response.BrinkDeliveryGetResponse;
 import com.brinkcommerce.api.management.order.delivery.model.response.BrinkDeliveryPostResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,8 +23,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-import static com.brinkcommerce.api.util.Mocks.mockOrderDeliveryPostRequest;
-import static com.brinkcommerce.api.util.Mocks.mockOrderDeliveryPostResponse;
+import static com.brinkcommerce.api.util.Mocks.*;
 import static com.brinkcommerce.api.util.TestUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -113,6 +114,30 @@ public class BrinkOrderTest {
         assertThatThrownBy(() -> sut.create(request))
                 .isInstanceOf(BrinkDeliveryException.class)
                 .hasMessageContaining(String.format("Http code: %d", statusCode));
+    }
+
+    void whenGet_returnBrinkDelivery() throws IOException, InterruptedException {
+        final BrinkDeliveryGetRequest request = mockOrderDeliveryGetRequest();
+        final BrinkDeliveryGetResponse response = mockOrderDeliveryGetResponse();
+        final HttpResponse<String> httpResponse = mockHttpResponse(response, 200);
+
+        when(httpClient.send(any(HttpRequest.class), any(HttpResponse.BodyHandler.class))).thenReturn(httpResponse);
+
+        assertThat(sut.get(request)).isEqualTo(response);
+
+        verify(httpClient)
+                .send(
+                        argThat(
+                                x -> {
+                                    assertThat(x.uri().toString())
+                                            .isEqualTo("http://mockserver.com/order-id-1/deliveries");
+                                    return true;
+                                }),
+                        argThat(
+                                x -> {
+                                    assertThat(x).isNotNull();
+                                    return true;
+                                }));
     }
 
 }
