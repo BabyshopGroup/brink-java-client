@@ -41,7 +41,6 @@ public class Mocks {
 
     public static BrinkDeliveryPostRequest mockOrderDeliveryPostRequest() {
         return BrinkDeliveryPostRequest.builder()
-                .withOrderId("order-id-1")
                 .withGiftCardProducts(List.of(
                         GiftCardProduct.builder().withGiftCardProductId("gift-card-product-id-1").build(),
                         GiftCardProduct.builder().withGiftCardProductId("gift-card-product-id-2").build()
@@ -253,6 +252,15 @@ public class Mocks {
     public static BrinkDeliveryGetRequest mockOrderDeliveryGetRequest() {
         return BrinkDeliveryGetRequest.builder()
                 .withDeliveryId("delivery-id-1")
+                .build();
+    }
+
+    public static BrinkDeliveryStartRequest mockOrderDeliveryStartRequest() {
+        return BrinkDeliveryStartRequest.builder()
+                .withBonus(com.brinkcommerce.api.management.order.delivery.model.request.Bonus.builder().withActionType(ActionType.AUTO).build())
+                .withGiftCard(com.brinkcommerce.api.management.order.delivery.model.request.GiftCard.builder().withActionType(ActionType.AUTO).build())
+                .withPayment(com.brinkcommerce.api.management.order.delivery.model.request.Payment.builder().withActionType(ActionType.AUTO).build())
+                .withShipping(com.brinkcommerce.api.management.order.delivery.model.request.Shipping.builder().withActionType(ActionType.AUTO).build())
                 .build();
     }
 

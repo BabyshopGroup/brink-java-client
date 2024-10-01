@@ -53,12 +53,13 @@ public class BrinkDeliveryApi {
     }
 
     public BrinkDeliveryPostResponse create(
-            final BrinkDeliveryPostRequest request
+            final BrinkDeliveryPostRequest request,
+            final String orderId
     ) {
         Objects.requireNonNull(request, "com.brinkcommerce.api.Brink Brink delivery post request cannot be null");
         final String uri = new StringBuilder()
                 .append(String.format("%s/", this.orderPath.toString()))
-                .append(String.format("%s/", request.orderId()))
+                .append(String.format("%s/", orderId))
                 .append("deliveries")
                 .toString();
 
@@ -79,16 +80,16 @@ public class BrinkDeliveryApi {
         } catch (final InterruptedException ie) {
             Thread.currentThread().interrupt();
             throw new BrinkDeliveryException(
-                    String.format("Failed to create delivery with for order id %s.", request.orderId()), ie, null);
+                    String.format("Failed to create delivery with for order id %s.", orderId), ie, null);
         } catch (final BrinkIntegrationException e) {
             throw new BrinkDeliveryException(
-                    String.format("Failed to create delivery with for order id %s.", request.orderId()),
+                    String.format("Failed to create delivery with for order id %s.", orderId),
                     e,
                     e.brinkHttpCode(),
                     e.requestId());
         } catch (final Exception e) {
             throw new BrinkDeliveryException(
-                    String.format("Failed to create delivery with for order id %s.", request.orderId()), e, null);
+                    String.format("Failed to create delivery with for order id %s.", orderId), e, null);
         }
     }
 
@@ -96,8 +97,8 @@ public class BrinkDeliveryApi {
             final BrinkDeliveryGetRequest request
     ) {
         final String uri = new StringBuilder()
+                .append(String.format("%s/", this.deliveryPath.toString()))
                 .append(String.format("%s/", request.deliveryId()))
-                .append("deliveries")
                 .toString();
 
         final HttpRequest httpRequest =
@@ -132,39 +133,43 @@ public class BrinkDeliveryApi {
     }
 
     public void start(
-            final BrinkDeliveryStartRequest request
+            final BrinkDeliveryStartRequest request,
+            final String deliveryId
             ) {
+        Objects.requireNonNull(request, "com.brinkcommerce.api.Brink Brink delivery start request cannot be null");
+
         final String uri = new StringBuilder()
                 .append(String.format("%s/", this.deliveryPath.toString()))
-                .append(String.format("%s/", request.deliveryId()))
+                .append(String.format("%s/", deliveryId))
                 .append("start")
                 .toString();
-        final HttpRequest httpRequest = httpRequestBuilderWithAuthentication(
-                URI.create(uri),
-                this.authenticationHandler.getToken(),
-                this.authenticationHandler.getApiKey())
-                .POST(HttpRequest.BodyPublishers.noBody())
-                .header(ACCEPT, APPLICATION_JSON)
-                .header(CONTENT_TYPE, APPLICATION_JSON)
-                .build();
+
         try {
+            final HttpRequest httpRequest = httpRequestBuilderWithAuthentication(
+                    URI.create(uri),
+                    this.authenticationHandler.getToken(),
+                    this.authenticationHandler.getApiKey())
+                    .POST(HttpRequest.BodyPublishers.ofString(this.mapper.writeValueAsString(request)))
+                    .header(ACCEPT, APPLICATION_JSON)
+                    .header(CONTENT_TYPE, APPLICATION_JSON)
+                    .build();
             final HttpResponse<String> response = makeRequest(httpRequest);
-            this.brinkHttpUtil.handleResponse(response, null);
+            this.brinkHttpUtil.handleResponse(response, Void.class);
         } catch (final InterruptedException ie) {
             Thread.currentThread().interrupt();
             throw new BrinkDeliveryException(
-                    String.format("Failed to start delivery with delivery-id %s.", request.deliveryId()),
+                    String.format("Failed to start delivery with delivery-id %s.", deliveryId),
                     ie,
                     null);
         } catch (final BrinkIntegrationException e) {
             throw new BrinkDeliveryException(
-                    String.format("Failed to start delivery with delivery-id %s.", request.deliveryId()),
+                    String.format("Failed to start delivery with delivery-id %s.", deliveryId),
                     e,
                     e.brinkHttpCode(),
                     e.requestId());
         } catch (final Exception e) {
             throw new BrinkDeliveryException(
-                    String.format("Failed to start delivery with delivery-id %s.", request.deliveryId()),
+                    String.format("Failed to start delivery with delivery-id %s.", deliveryId),
                     e,
                     null);
         }
