@@ -6,7 +6,4 @@ public record GiftCardProductProvider(
         String providerId,
         String providerName
 ) {
-    public static WithStatus<GiftCardProductProvider> withStatus(GiftCardProductProvider provider, String current, List<History> history) {
-        return new WithStatus<>(provider, current, history);
-    }
 }

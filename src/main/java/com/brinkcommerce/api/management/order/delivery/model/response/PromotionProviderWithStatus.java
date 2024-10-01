@@ -1,9 +1,8 @@
 package com.brinkcommerce.api.management.order.delivery.model.response;
 
-import java.util.List;
-
-public record BonusProvider(
+public record PromotionProviderWithStatus(
         String providerId,
-        String providerName
+        String description,
+        ProviderStatus status
 ) {
 }

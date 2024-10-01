@@ -6,7 +6,4 @@ public record PromotionProvider(
         String providerId,
         String description
 ) {
-    public static WithStatus<PromotionProvider> withStatus(PromotionProvider provider, String current, List<History> history) {
-        return new WithStatus<>(provider, current, history);
-    }
 }

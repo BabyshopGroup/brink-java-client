@@ -6,7 +6,4 @@ public record ShippingProvider(
         String carrierName,
         String providerId
 ) {
-    public static WithStatus<ShippingProvider> withStatus(ShippingProvider provider, String current, List<History> history) {
-        return new WithStatus<>(provider, current, history);
-    }
 }

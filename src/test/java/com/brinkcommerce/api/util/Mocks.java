@@ -271,56 +271,51 @@ public class Mocks {
                 "order-reference-1",
 
                 List.of(
-                        ShippingProvider.withStatus(
-                                new ShippingProvider("shipping-provider-name-1", "shipping-provider-id-1"),
-                                "history-id-1",
-                                List.of(new History("history-id-1", "status-1", "message-1", "error-mesage", Instant.now()))
+                        new ShippingProviderWithStatus(
+                                "shipping-provider-name-1", "shipping-provider-id-1",
+                                new ProviderStatus("status-1", List.of(new History("history-id-1", "status-1", "message-1", "error-mesage", Instant.now())))
                         )
                 ),
-                List.of(PaymentProvider.withStatus(
-                        new PaymentProvider(
-                                "payment-provider-name-1",
-                                "payment-provider-id-1"
-                        ),
-                        "history-id-1",
-                        List.of(new History("history-id-1", "status-1", "message-1", "error-mesage", Instant.now()))
+                List.of(new PaymentProviderWithStatus(
+                        "payment-provider-name-1",
+                        "payment-provider-id-1",
+                        new ProviderStatus("status-1", List.of(new History("history-id-1", "status-1", "message-1", "error-mesage", Instant.now())))
                 )),
                 List.of(
-                        VoucherProvider.withStatus(
-                                new VoucherProvider("voucher-provider-name-1", "voucher-provider-id-1"),
-                                "history-id-1",
-                                List.of(new History("history-id-1", "status-1", "message-1", "error-mesage", Instant.now()))
+                    new VoucherProviderWithStatus(
+                            "voucher-provider-name-1",
+                            "voucher-provider-id-1",
+                            new ProviderStatus("status-1", List.of(new History("history-id-1", "status-1", "message-1", "error-mesage", Instant.now())))
+                    )
+                ),
+                List.of(
+                        new GiftCardProviderWithStatus(
+                                "gift-card-provider-name-1",
+                                "gift-card-provider-id-1",
+                                new ProviderStatus("status-1", List.of(new History("history-id-1", "status-1", "message-1", "error-mesage", Instant.now())))
                         )
                 ),
                 List.of(
-                        GiftCardProvider.withStatus(
-                                new GiftCardProvider("gift-card-provider-name-1", "gift-card-provider-id-1"),
-                                "history-id-1",
-                                List.of(new History("history-id-1", "status-1", "message-1", "error-mesage", Instant.now()))
+                        new GiftCardProductProviderWithStatus(
+                                "gift-card-product-provider-name-1",
+                                "gift-card-product-provider-id-1",
+                                new ProviderStatus("status-1", List.of(new History("history-id-1", "status-1", "message-1", "error-mesage", Instant.now())))
                         )
                 ),
                 List.of(
-                        GiftCardProductProvider.withStatus(
-                                new GiftCardProductProvider("gift-card-product-provider-name-1", "gift-card-product-provider-id-1"),
-                                "history-id-1",
-                                List.of(new History("history-id-1", "status-1", "message-1", "error-mesage", Instant.now()))
+                        new PromotionProviderWithStatus(
+                                "promotion-provider-name-1",
+                                "promotion-provider-id-1",
+                                new ProviderStatus("status-1", List.of(new History("history-id-1", "status-1", "message-1", "error-mesage", Instant.now())))
                         )
                 ),
                 List.of(
-                        PromotionProvider.withStatus(
-                                new PromotionProvider("promotion-provider-name-1", "promotion-provider-id-1"),
-                                "history-id-1",
-                                List.of(new History("history-id-1", "status-1", "message-1", "error-mesage", Instant.now()))
+                        new BonusProviderWithStatus(
+                                "bonus-provider-name-1",
+                                "bonus-provider-id-1",
+                                new ProviderStatus("status-1", List.of(new History("history-id-1", "status-1", "message-1", "error-mesage", Instant.now())))
                         )
                 ),
-                List.of(
-                        BonusProvider.withStatus(
-                                new BonusProvider("bonus-provider-name-1", "bonus-provider-id-1"),
-                                "history-id-1",
-                                List.of(new History("history-id-1", "status-1", "message-1", "error-mesage", Instant.now()))
-                        )
-                ),
-
                 List.of(
                         new com.brinkcommerce.api.management.order.delivery.model.response.OrderLine(
                                 "order-line-id-1",
