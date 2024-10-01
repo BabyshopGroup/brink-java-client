@@ -56,6 +56,9 @@ public class BrinkHttpUtil {
           "Empty response from com.brinkcommerce.api.Brink API.");
     } else if (response.statusCode() == HttpStatus.SC_NO_CONTENT) {
       return "";
+    } else if (response.statusCode() == HttpStatus.SC_ACCEPTED) {
+      // brittle clause to handle start delivery response
+      return "";
     } else {
       final BrinkHttpErrorMessage errorMessage =
           this.mapper.readValue(response.body(), BrinkHttpErrorMessage.class);
