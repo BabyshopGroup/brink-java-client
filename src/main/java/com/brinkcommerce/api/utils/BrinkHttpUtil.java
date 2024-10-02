@@ -15,6 +15,8 @@ import java.net.http.HttpResponse;
 import java.util.Objects;
 import org.apache.http.HttpStatus;
 
+import static java.util.Objects.requireNonNull;
+
 
 public class BrinkHttpUtil {
 
@@ -47,24 +49,25 @@ public class BrinkHttpUtil {
         .header(X_API_KEY, String.format("%s", apiKey));
   }
 
-  public <T> Object handleResponse(final HttpResponse<String> response, final Class<T> typeParameterClass)
-      throws JsonProcessingException {
+  public <T> Object handleResponse(final HttpResponse<String> response, final Class<T> typeParameterClass) throws JsonProcessingException {
+    return switch (response.statusCode()) {
+      case HttpStatus.SC_OK -> parseResponseBody(response, typeParameterClass);
+      case HttpStatus.SC_NO_CONTENT, HttpStatus.SC_ACCEPTED -> "";
 
-    if (response.statusCode() == HttpStatus.SC_OK) {
-      return Objects.requireNonNull(
-          this.mapper.readValue(response.body(), typeParameterClass),
-          "Empty response from com.brinkcommerce.api.Brink API.");
-    } else if (response.statusCode() == HttpStatus.SC_NO_CONTENT) {
-      return "";
-    } else {
-      final BrinkHttpErrorMessage errorMessage =
-          this.mapper.readValue(response.body(), BrinkHttpErrorMessage.class);
+      default -> {
+        final BrinkHttpErrorMessage errorMessage = this.mapper.readValue(response.body(), BrinkHttpErrorMessage.class);
+        throw new BrinkIntegrationException(
+                response.body(),
+                errorMessage.requestId(),
+                BrinkHttpCode.fromHttpCode(response.statusCode()));
+      }
+    };
+  }
 
-      throw new BrinkIntegrationException(
-          response.body(),
-          errorMessage.requestId(),
-          BrinkHttpCode.fromHttpCode(response.statusCode()));
-    }
+  private <T> T parseResponseBody(final HttpResponse<String> response, final Class<T> typeParameterClass) throws JsonProcessingException {
+    return requireNonNull(
+            this.mapper.readValue(response.body(), typeParameterClass),
+            "Empty response from com.brinkcommerce.api.Brink API.");
   }
 
   @Deprecated
