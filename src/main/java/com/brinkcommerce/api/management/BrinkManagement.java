@@ -2,6 +2,7 @@ package com.brinkcommerce.api.management;
 
 import com.brinkcommerce.api.configuration.ManagementConfiguration;
 import com.brinkcommerce.api.management.discount.BrinkDiscountApi;
+import com.brinkcommerce.api.management.order.BrinkOrderApi;
 import com.brinkcommerce.api.management.price.BrinkPriceApi;
 import com.brinkcommerce.api.management.product.BrinkProductApi;
 import com.brinkcommerce.api.management.stock.BrinkStockApi;
@@ -17,6 +18,7 @@ public class BrinkManagement {
   private final BrinkTaxApi taxApi;
   private final BrinkStockApi stockApi;
   private final BrinkDiscountApi discountApi;
+  private final BrinkOrderApi orderApi;
 
   private BrinkManagement(final ManagementConfiguration config) {
     this.productApi = BrinkProductApi.init(config);
@@ -25,6 +27,7 @@ public class BrinkManagement {
     this.taxApi = BrinkTaxApi.init(config);
     this.stockApi = BrinkStockApi.init(config);
     this.discountApi = BrinkDiscountApi.init(config);
+    this.orderApi = BrinkOrderApi.init(config);
   }
 
   public static BrinkManagement init(final ManagementConfiguration config) {
@@ -53,6 +56,10 @@ public class BrinkManagement {
 
   public BrinkDiscountApi discount() {
     return this.discountApi;
+  }
+
+  public BrinkOrderApi order() {
+    return this.orderApi;
   }
 
 }
