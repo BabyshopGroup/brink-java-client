@@ -77,9 +77,9 @@ public class Mocks {
                 List.of(
                         new com.brinkcommerce.api.management.order.delivery.model.response.OrderLine(
                                 "order-line-id-1",
-                                1,
+                                1L,
                                 0L,
-                                3,
+                                3L,
                                 "SEK",
                                 0L,
                                 0L,
@@ -90,7 +90,7 @@ public class Mocks {
                         new ShippingFee(
                                 "shipping-fee-1",
                                 0L,
-                                3,
+                                3L,
                                 "SEK",
                                 0L,
                                 0L,
@@ -98,7 +98,7 @@ public class Mocks {
                         )
                 ),
                 List.of(
-                        new com.brinkcommerce.api.management.order.delivery.model.response.Gift("gift-id-1", 1)
+                        new com.brinkcommerce.api.management.order.delivery.model.response.Gift("gift-id-1", 1L)
                 ),
                 List.of(
                         new GiftCard(
@@ -155,10 +155,10 @@ public class Mocks {
                 Instant.now(),
                 Instant.now(),
                 Instant.now(),
-                1,
+                1L,
                 Instant.now(),
                 Instant.now(),
-                1
+                1L
         );
     }
 
@@ -319,9 +319,9 @@ public class Mocks {
                 List.of(
                         new com.brinkcommerce.api.management.order.delivery.model.response.OrderLine(
                                 "order-line-id-1",
-                                1,
+                                1L,
                                 0L,
-                                3,
+                                3L,
                                 "SEK",
                                 0L,
                                 0L,
@@ -332,7 +332,7 @@ public class Mocks {
                         new ShippingFee(
                                 "shipping-fee-1",
                                 0L,
-                                3,
+                                3L,
                                 "SEK",
                                 0L,
                                 0L,
@@ -340,7 +340,7 @@ public class Mocks {
                         )
                 ),
                 List.of(
-                        new com.brinkcommerce.api.management.order.delivery.model.response.Gift("gift-id-1", 1)
+                        new com.brinkcommerce.api.management.order.delivery.model.response.Gift("gift-id-1", 1L)
                 ),
                 List.of(
                         new GiftCard(
@@ -398,10 +398,10 @@ public class Mocks {
                 Instant.now(),
                 Instant.now(),
                 Instant.now(),
-                1,
+                1L,
                 Instant.now(),
                 Instant.now(),
-                1
+                1L
         );
     }
 
