@@ -28,8 +28,8 @@ public record BrinkDeliveryGetResponse(
         Instant updated,
         Instant started,
         Instant restarted,
-        Integer restarts,
+        Long restarts,
         Instant completed,
         Instant failed,
-        Integer revision
+        Long revision
 ) {}

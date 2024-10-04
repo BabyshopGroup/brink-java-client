@@ -2,9 +2,9 @@ package com.brinkcommerce.api.management.order.delivery.model.response;
 
 public record OrderLine(
         String orderLineId,
-        Integer quantity,
+        Long quantity,
         Long taxPercentage,
-        Integer taxPercentageDecimals,
+        Long taxPercentageDecimals,
         String currencyCode,
         Long totalAmount,
         Long totalTaxAmount,
