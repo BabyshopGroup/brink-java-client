@@ -2,7 +2,7 @@ package com.brinkcommerce.api.management.order.delivery.model.request;
 
 public record OrderLine(
         String orderLineId,
-        int quantity
+        Long quantity
 ) {
 
         private OrderLine(final OrderLineBuilder builder) {
@@ -18,7 +18,7 @@ public record OrderLine(
 
         public static class OrderLineBuilder {
             private String orderLineId;
-            private int quantity;
+            private Long quantity;
 
             public OrderLineBuilder() {
             }
@@ -28,7 +28,7 @@ public record OrderLine(
                 return this;
             }
 
-            public OrderLineBuilder withQuantity(final int quantity) {
+            public OrderLineBuilder withQuantity(final Long quantity) {
                 this.quantity = quantity;
                 return this;
             }

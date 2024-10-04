@@ -2,7 +2,7 @@ package com.brinkcommerce.api.management.order.delivery.model.request;
 
 public record Gift(
         String giftId,
-        int quantity
+        Long quantity
 ) {
 
     private Gift(final RequestGiftBuilder builder) {
@@ -18,7 +18,7 @@ public record Gift(
 
     public static class RequestGiftBuilder {
         private String giftId;
-        private int quantity;
+        private Long quantity;
 
         public RequestGiftBuilder() {
         }
@@ -28,7 +28,7 @@ public record Gift(
             return this;
         }
 
-        public RequestGiftBuilder withQuantity(final int quantity) {
+        public RequestGiftBuilder withQuantity(final Long quantity) {
             this.quantity = quantity;
             return this;
         }

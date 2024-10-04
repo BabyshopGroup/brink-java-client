@@ -47,16 +47,16 @@ public class Mocks {
                 ))
                 .withOrderLines(
                         List.of(
-                                OrderLine.builder().withOrderLineId("order-line-id-1").withQuantity(1).build(),
-                                OrderLine.builder().withOrderLineId("order-line-id-2").withQuantity(2).build()
+                                OrderLine.builder().withOrderLineId("order-line-id-1").withQuantity(1L).build(),
+                                OrderLine.builder().withOrderLineId("order-line-id-2").withQuantity(2L).build()
                         ))
                 .withShippingFees(
                         List.of("shipping-fee-1", "shipping-fee-2")
                 )
                 .withGifts(
                         List.of(
-                                Gift.builder().withGiftId("gift-id-1").withQuantity(1).build(),
-                                Gift.builder().withGiftId("gift-id-2").withQuantity(2).build()
+                                Gift.builder().withGiftId("gift-id-1").withQuantity(1L).build(),
+                                Gift.builder().withGiftId("gift-id-2").withQuantity(2L).build()
                         )
                 )
                 .build();
