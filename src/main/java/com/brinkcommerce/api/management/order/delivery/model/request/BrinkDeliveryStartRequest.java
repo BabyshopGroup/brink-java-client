@@ -1,7 +1,6 @@
 package com.brinkcommerce.api.management.order.delivery.model.request;
 
 public record BrinkDeliveryStartRequest(
-        String deliveryId,
         Payment payment,
         Shipping shipping,
         GiftCard giftCard,
@@ -9,7 +8,6 @@ public record BrinkDeliveryStartRequest(
 ) {
     private BrinkDeliveryStartRequest(final BrinkDeliveryStartRequestBuilder builder) {
         this(
-            builder.deliveryId,
             builder.payment,
             builder.shipping,
             builder.giftCard,
@@ -22,18 +20,12 @@ public record BrinkDeliveryStartRequest(
     }
 
     public static class BrinkDeliveryStartRequestBuilder {
-        private String deliveryId;
         private Payment payment;
         private Shipping shipping;
         private GiftCard giftCard;
         private Bonus bonus;
 
         public BrinkDeliveryStartRequestBuilder() {
-        }
-
-        public BrinkDeliveryStartRequestBuilder withDeliveryId(final String deliveryId) {
-            this.deliveryId = deliveryId;
-            return this;
         }
 
         public BrinkDeliveryStartRequestBuilder withPayment(final Payment payment) {
