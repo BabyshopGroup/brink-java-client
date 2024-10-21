@@ -68,12 +68,12 @@ public class Mocks {
                 "order-id-1",
                 "order-reference-1",
                 new PaymentProvider("payment-provider-name-1", "payment-provider-id-1"),
-                new ShippingProvider("shipping-provider-name-1", "shipping-provider-id-1"),
-                new PromotionProvider("promotion-provider-name-1", "promotion-provider-id-1"),
-                new GiftCardProvider("gift-card-provider-name-1", "gift-card-provider-id-1"),
-                new GiftCardProductProvider("gift-card-product-provider-name-1", "gift-card-product-provider-id-1"),
-                new VoucherProvider("voucher-provider-name-1", "voucher-provider-id-1"),
-                new BonusProvider("bonus-provider-name-1", "bonus-provider-id-1"),
+                Optional.of(new ShippingProvider("shipping-provider-name-1", "shipping-provider-id-1")),
+                Optional.of(new PromotionProvider("promotion-provider-name-1", "promotion-provider-id-1")),
+                Optional.of(new GiftCardProvider("gift-card-provider-name-1", "gift-card-provider-id-1")),
+                Optional.of(new GiftCardProductProvider("gift-card-product-provider-name-1", "gift-card-product-provider-id-1")),
+                Optional.of(new VoucherProvider("voucher-provider-name-1", "voucher-provider-id-1")),
+                Optional.of(new BonusProvider("bonus-provider-name-1", "bonus-provider-id-1")),
                 List.of(
                         new com.brinkcommerce.api.management.order.delivery.model.response.OrderLine(
                                 "order-line-id-1",
@@ -128,21 +128,21 @@ public class Mocks {
                                 "SEK"
                         )
                 ),
-                new Bonus(
+                Optional.of(new Bonus(
                         "bonus-id-1",
                         "reservation-id-1",
                         100L,
                         "SEK"
-                ),
-                new Tracking(
+                )),
+                Optional.of(new Tracking(
                         "tracking-id-1",
                         "tracking-url-1",
                         "shipping-method-1",
                         "shipping-company-1"
-                ),
-                new CapturedPayment(
+                )),
+                Optional.of(new CapturedPayment(
                         "captured-payment-reference-1"
-                ),
+                )),
                 new Totals(
                         100L,
                         0L,
@@ -153,11 +153,11 @@ public class Mocks {
                 ),
                 Instant.now(),
                 Instant.now(),
-                Instant.now(),
-                Instant.now(),
-                1L,
-                Instant.now(),
-                Instant.now(),
+                Optional.of(Instant.now()),
+                Optional.of(Instant.now()),
+                Optional.of(1L),
+                Optional.of(Instant.now()),
+                Optional.of(Instant.now()),
                 1L
         );
     }
@@ -269,53 +269,40 @@ public class Mocks {
                 "delivery-id-1",
                 "order-id-1",
                 "order-reference-1",
-
-                List.of(
-                        new ShippingProviderWithStatus(
-                                "shipping-provider-name-1", "shipping-provider-id-1",
-                                new ProviderStatus("status-1", List.of(new History("history-id-1", "status-1", "message-1", "error-mesage", Instant.now())))
-                        )
-                ),
-                List.of(new PaymentProviderWithStatus(
+                Optional.of(new PaymentProviderWithStatus(
                         "payment-provider-name-1",
                         "payment-provider-id-1",
                         new ProviderStatus("status-1", List.of(new History("history-id-1", "status-1", "message-1", "error-mesage", Instant.now())))
                 )),
-                List.of(
-                    new VoucherProviderWithStatus(
-                            "voucher-provider-name-1",
-                            "voucher-provider-id-1",
-                            new ProviderStatus("status-1", List.of(new History("history-id-1", "status-1", "message-1", "error-mesage", Instant.now())))
-                    )
-                ),
-                List.of(
-                        new GiftCardProviderWithStatus(
-                                "gift-card-provider-name-1",
-                                "gift-card-provider-id-1",
-                                new ProviderStatus("status-1", List.of(new History("history-id-1", "status-1", "message-1", "error-mesage", Instant.now())))
-                        )
-                ),
-                List.of(
-                        new GiftCardProductProviderWithStatus(
-                                "gift-card-product-provider-name-1",
-                                "gift-card-product-provider-id-1",
-                                new ProviderStatus("status-1", List.of(new History("history-id-1", "status-1", "message-1", "error-mesage", Instant.now())))
-                        )
-                ),
-                List.of(
-                        new PromotionProviderWithStatus(
-                                "promotion-provider-name-1",
-                                "promotion-provider-id-1",
-                                new ProviderStatus("status-1", List.of(new History("history-id-1", "status-1", "message-1", "error-mesage", Instant.now())))
-                        )
-                ),
-                List.of(
-                        new BonusProviderWithStatus(
-                                "bonus-provider-name-1",
-                                "bonus-provider-id-1",
-                                new ProviderStatus("status-1", List.of(new History("history-id-1", "status-1", "message-1", "error-mesage", Instant.now())))
-                        )
-                ),
+                Optional.of(new ShippingProviderWithStatus(
+                        "shipping-provider-name-1", "shipping-provider-id-1",
+                        new ProviderStatus("status-1", List.of(new History("history-id-1", "status-1", "message-1", "error-mesage", Instant.now())))
+                )),
+                Optional.of(new VoucherProviderWithStatus(
+                        "voucher-provider-name-1",
+                        "voucher-provider-id-1",
+                        new ProviderStatus("status-1", List.of(new History("history-id-1", "status-1", "message-1", "error-mesage", Instant.now())))
+                )),
+                Optional.of(new GiftCardProviderWithStatus(
+                        "gift-card-provider-name-1",
+                        "gift-card-provider-id-1",
+                        new ProviderStatus("status-1", List.of(new History("history-id-1", "status-1", "message-1", "error-mesage", Instant.now())))
+                )),
+                Optional.of(new GiftCardProductProviderWithStatus(
+                        "gift-card-product-provider-name-1",
+                        "gift-card-product-provider-id-1",
+                        new ProviderStatus("status-1", List.of(new History("history-id-1", "status-1", "message-1", "error-mesage", Instant.now())))
+                )),
+                Optional.of(new PromotionProviderWithStatus(
+                        "promotion-provider-name-1",
+                        "promotion-provider-id-1",
+                        new ProviderStatus("status-1", List.of(new History("history-id-1", "status-1", "message-1", "error-mesage", Instant.now())))
+                )),
+                Optional.of(new BonusProviderWithStatus(
+                        "bonus-provider-name-1",
+                        "bonus-provider-id-1",
+                        new ProviderStatus("status-1", List.of(new History("history-id-1", "status-1", "message-1", "error-mesage", Instant.now())))
+                )),
                 List.of(
                         new com.brinkcommerce.api.management.order.delivery.model.response.OrderLine(
                                 "order-line-id-1",
@@ -370,37 +357,36 @@ public class Mocks {
                                 "SEK"
                         )
                 ),
-
-                List.of(new Bonus(
+                Optional.of(new Bonus(
                         "bonus-id-1",
                         "reservation-id-1",
                         100L,
                         "SEK"
                 )),
-                List.of(new Tracking(
+                Optional.of(new Tracking(
                         "tracking-id-1",
                         "tracking-url-1",
                         "shipping-method-1",
                         "shipping-company-1"
                 )),
-                List.of(new CapturedPayment(
+                Optional.of(new CapturedPayment(
                         "captured-payment-reference-1"
                 )),
-                List.of(new Totals(
+                new Totals(
                         100L,
                         0L,
                         0L,
                         0L,
                         0L,
                         0L
-                )),
+                ),
                 Instant.now(),
                 Instant.now(),
-                Instant.now(),
-                Instant.now(),
-                1L,
-                Instant.now(),
-                Instant.now(),
+                Optional.of(Instant.now()),
+                Optional.of(Instant.now()),
+                Optional.of(1L),
+                Optional.of(Instant.now()),
+                Optional.of(Instant.now()),
                 1L
         );
     }
