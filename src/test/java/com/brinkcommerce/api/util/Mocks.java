@@ -7,11 +7,11 @@ import com.brinkcommerce.api.management.order.delivery.model.request.*;
 import com.brinkcommerce.api.management.order.delivery.model.response.Bonus;
 import com.brinkcommerce.api.management.order.delivery.model.response.GiftCard;
 import com.brinkcommerce.api.management.order.delivery.model.response.*;
-import com.brinkcommerce.api.management.order.model.request.BrinkOrderCancellationPostRequest;
-import com.brinkcommerce.api.management.order.model.request.BrinkOrderReleasePostRequest;
-import com.brinkcommerce.api.management.order.model.request.BrinkOrderStartCancellationPostRequest;
-import com.brinkcommerce.api.management.order.model.request.Reason;
-import com.brinkcommerce.api.management.order.model.response.*;
+import com.brinkcommerce.api.management.order.model.request.*;
+import com.brinkcommerce.api.management.order.model.response.BrinkOrderCancellationPostResponse;
+import com.brinkcommerce.api.management.order.model.response.BrinkOrderReleasePostResponse;
+import com.brinkcommerce.api.management.order.model.response.CancelledPayment;
+import com.brinkcommerce.api.management.order.model.response.ReleasedPayment;
 import com.brinkcommerce.api.management.price.addon.BrinkPriceAddon;
 import com.brinkcommerce.api.management.price.addon.BrinkPriceAddonRequest;
 import com.brinkcommerce.api.management.price.variant.model.*;
@@ -47,21 +47,11 @@ public class Mocks {
 
     public static BrinkOrderStartCancellationPostRequest mockBrinkOrderStartCancellationPostRequest() {
         return BrinkOrderStartCancellationPostRequest.builder()
-                .withReason(
-                        Reason.builder()
-                                .withCode("reason-id-1")
-                                .withCause("generic reason cause")
-                                .build()
-                ).build();
-    }
-
-    public static BrinkOrderStartCancellationPostResponse mockBrinkOrderStartCancellationPostResponse() {
-        return new BrinkOrderStartCancellationPostResponse(
-                new CancellationActionBonusAuto(),
-                new CancellationActionGiftCardAuto(),
-                new CancellationActionGiftCardProductAuto(),
-                new CancellationActionPaymentAuto()
-        );
+                .withBonus(new CancellationActionBonusAuto())
+                .withGiftCard(new CancellationActionGiftCardAuto())
+                .withPayment(new CancellationActionPaymentAuto())
+                .withGiftCardProduct(new CancellationActionGiftCardProductAuto())
+                .build();
     }
 
     public static BrinkOrderReleasePostRequest mockOrderReleasePostRequest() {

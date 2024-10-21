@@ -9,7 +9,6 @@ import com.brinkcommerce.api.management.order.model.request.BrinkOrderReleasePos
 import com.brinkcommerce.api.management.order.model.request.BrinkOrderStartCancellationPostRequest;
 import com.brinkcommerce.api.management.order.model.response.BrinkOrderReleasePostResponse;
 import com.brinkcommerce.api.management.order.model.response.BrinkOrderCancellationPostResponse;
-import com.brinkcommerce.api.management.order.model.response.BrinkOrderStartCancellationPostResponse;
 import com.brinkcommerce.api.utils.BrinkHttpUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -95,7 +94,7 @@ public class OrderApi {
         }
     }
 
-    public BrinkOrderStartCancellationPostResponse startCancel(final BrinkOrderStartCancellationPostRequest request, final String cancellationId) {
+    public void startCancel(final BrinkOrderStartCancellationPostRequest request, final String cancellationId) {
         Objects.requireNonNull(request, "Request cannot be null");
         final String uri = new StringBuilder()
                 .append(this.cancellationPath)
@@ -115,7 +114,7 @@ public class OrderApi {
                     .build();
 
             final HttpResponse<String> response = makeRequest(httpRequest);
-            return (BrinkOrderStartCancellationPostResponse) this.brinkHttpUtil.handleResponse(response, BrinkOrderStartCancellationPostResponse.class);
+            this.brinkHttpUtil.handleResponse(response, Void.class);
         } catch (final InterruptedException ie) {
             Thread.currentThread().interrupt();
             throw new BrinkOrderException(
