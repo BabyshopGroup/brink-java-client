@@ -1,4 +1,4 @@
-package com.brinkcommerce.api.management.order.model.response;
+package com.brinkcommerce.api.management.order.model.request;
 
 import com.brinkcommerce.api.management.order.delivery.model.request.ActionType;
 

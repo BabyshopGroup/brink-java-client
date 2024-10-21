@@ -5,15 +5,12 @@ import com.brinkcommerce.api.common.BrinkHttpErrorMessage;
 import com.brinkcommerce.api.configuration.BrinkAuthentication;
 import com.brinkcommerce.api.configuration.ManagementConfiguration;
 import com.brinkcommerce.api.management.order.OrderApi;
-import com.brinkcommerce.api.management.order.delivery.BrinkDeliveryException;
 import com.brinkcommerce.api.management.order.delivery.BrinkOrderException;
-import com.brinkcommerce.api.management.order.delivery.model.request.BrinkDeliveryPostRequest;
 import com.brinkcommerce.api.management.order.model.request.BrinkOrderCancellationPostRequest;
 import com.brinkcommerce.api.management.order.model.request.BrinkOrderReleasePostRequest;
 import com.brinkcommerce.api.management.order.model.request.BrinkOrderStartCancellationPostRequest;
 import com.brinkcommerce.api.management.order.model.response.BrinkOrderCancellationPostResponse;
 import com.brinkcommerce.api.management.order.model.response.BrinkOrderReleasePostResponse;
-import com.brinkcommerce.api.management.order.model.response.BrinkOrderStartCancellationPostResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,8 +30,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.argThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class BrinkOrderApiTest {
@@ -185,13 +181,12 @@ public class BrinkOrderApiTest {
         final String cancellationId = "cancellation-id-1";
         final BrinkOrderStartCancellationPostRequest request = mockBrinkOrderStartCancellationPostRequest();
 
-        final BrinkOrderStartCancellationPostResponse response = mockBrinkOrderStartCancellationPostResponse();
+        final HttpResponse<String> httpResponse = mock(HttpResponse.class);
 
-        HttpResponse<String> httpResponse = mockHttpResponse(response, 200);
-
+        when(httpResponse.statusCode()).thenReturn(202);
         when(httpClient.send(any(HttpRequest.class), any(HttpResponse.BodyHandler.class))).thenReturn(httpResponse);
 
-        assertThat(sut.startCancel(request, cancellationId)).isEqualTo(response);
+        sut.startCancel(request, cancellationId);
 
         verify(httpClient)
                 .send(
