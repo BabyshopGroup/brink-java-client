@@ -7,6 +7,7 @@ import com.brinkcommerce.api.management.order.delivery.BrinkDeliveryApi;
 public class BrinkOrderApi {
     private static final String SCOPES = "order-management/order:read order-management/order:write";
     private final BrinkDeliveryApi deliveryApi;
+    private final OrderApi orderApi;
 
     private BrinkOrderApi(final ManagementConfiguration config) {
         final AuthenticationHandler authenticationHandler =
@@ -17,13 +18,19 @@ public class BrinkOrderApi {
                         .withScopes(SCOPES)
                         .build();
         this.deliveryApi = BrinkDeliveryApi.init(config, authenticationHandler);
+        this.orderApi = OrderApi.init(config, authenticationHandler);
     }
 
     public static BrinkOrderApi init(final ManagementConfiguration config) {
         return new BrinkOrderApi(config);
     }
 
+    public OrderApi order() {
+        return this.orderApi;
+    }
+
     public BrinkDeliveryApi delivery() {
         return this.deliveryApi;
     }
+
 }

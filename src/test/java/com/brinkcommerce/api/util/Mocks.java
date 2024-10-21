@@ -7,6 +7,11 @@ import com.brinkcommerce.api.management.order.delivery.model.request.*;
 import com.brinkcommerce.api.management.order.delivery.model.response.Bonus;
 import com.brinkcommerce.api.management.order.delivery.model.response.GiftCard;
 import com.brinkcommerce.api.management.order.delivery.model.response.*;
+import com.brinkcommerce.api.management.order.model.request.BrinkOrderCancellationPostRequest;
+import com.brinkcommerce.api.management.order.model.request.BrinkOrderReleasePostRequest;
+import com.brinkcommerce.api.management.order.model.request.BrinkOrderStartCancellationPostRequest;
+import com.brinkcommerce.api.management.order.model.request.Reason;
+import com.brinkcommerce.api.management.order.model.response.*;
 import com.brinkcommerce.api.management.price.addon.BrinkPriceAddon;
 import com.brinkcommerce.api.management.price.addon.BrinkPriceAddonRequest;
 import com.brinkcommerce.api.management.price.variant.model.*;
@@ -36,8 +41,183 @@ import java.time.Instant;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class Mocks {
+
+    public static BrinkOrderStartCancellationPostRequest mockBrinkOrderStartCancellationPostRequest() {
+        return BrinkOrderStartCancellationPostRequest.builder()
+                .withReason(
+                        Reason.builder()
+                                .withCode("reason-id-1")
+                                .withCause("generic reason cause")
+                                .build()
+                ).build();
+    }
+
+    public static BrinkOrderStartCancellationPostResponse mockBrinkOrderStartCancellationPostResponse() {
+        return new BrinkOrderStartCancellationPostResponse(
+                new CancellationActionBonusAuto(),
+                new CancellationActionGiftCardAuto(),
+                new CancellationActionGiftCardProductAuto(),
+                new CancellationActionPaymentAuto()
+        );
+    }
+
+    public static BrinkOrderReleasePostRequest mockOrderReleasePostRequest() {
+        return BrinkOrderReleasePostRequest.builder()
+                .withReason(
+                        Reason.builder()
+                                .withCode("reason-id-1")
+                                .withCause("generic reason cause")
+                                .build()
+                ).build();
+    }
+
+    public static BrinkOrderReleasePostResponse mockOrderReleasePostResponse() {
+        return new BrinkOrderReleasePostResponse(
+                "delivery-id-1",
+                "order-id-1",
+                "order-reference-1",
+                new PaymentProvider("payment-provider-name-1", "payment-provider-id-1"),
+                Optional.of(new ShippingProvider("shipping-provider-name-1", "shipping-provider-id-1")),
+                Optional.of(new PromotionProvider("promotion-provider-name-1", "promotion-provider-id-1")),
+                Optional.of(new GiftCardProvider("gift-card-provider-name-1", "gift-card-provider-id-1")),
+                Optional.of(new GiftCardProductProvider("gift-card-product-provider-name-1", "gift-card-product-provider-id-1")),
+                Optional.of(new VoucherProvider("voucher-provider-name-1", "voucher-provider-id-1")),
+                Optional.of(new BonusProvider("bonus-provider-name-1", "bonus-provider-id-1")),
+                new Reason("reason-id-1", "generic reason cause"),
+                List.of(
+                        new com.brinkcommerce.api.management.order.delivery.model.response.OrderLine(
+                                "order-line-id-1",
+                                1L,
+                                0L,
+                                3L,
+                                "SEK",
+                                0L,
+                                0L,
+                                0L
+                        )
+                ),
+                List.of(
+                        new ShippingFee(
+                                "shipping-fee-1",
+                                0L,
+                                3L,
+                                "SEK",
+                                0L,
+                                0L,
+                                0L
+                        )
+                ),
+                List.of(
+                        new com.brinkcommerce.api.management.order.delivery.model.response.Gift("gift-id-1", 1L)
+                ),
+                List.of(
+                        new GiftCard(
+                                "gift-card-id-1",
+                                0L,
+                                "SEK",
+                                "status string",
+                                "reservation-id-1",
+                                "transaction-id-1"
+                        )
+
+                ),
+                List.of(
+                        new com.brinkcommerce.api.management.order.delivery.model.response.GiftCardProduct(
+                                "gift-card-product-id-1",
+                                "SEK",
+                                0L,
+                                "status string",
+                                "transaction-id-1",
+                                "failed reason string",
+                                "create-id-1"
+                        )
+                ),
+                new ReleasedPayment(
+                        "cancelled-payment-reference-1"
+                ),
+                Optional.of(new Bonus(
+                        "bonus-id-1",
+                        "reservation-id-1",
+                        100L,
+                        "SEK"
+                )),
+                Instant.now(),
+                Instant.now(),
+                Optional.of(Instant.now()),
+                Optional.of(Instant.now()),
+                Optional.of(1L),
+                Optional.of(Instant.now()),
+                Optional.of(Instant.now()),
+                1L
+        );
+    }
+
+    public static BrinkOrderCancellationPostRequest mockOrderCancellationPostRequest() {
+        return BrinkOrderCancellationPostRequest.builder()
+                .withReason(
+                        Reason.builder()
+                                .withCode("reason-id-1")
+                                .withCause("generic reason cause")
+                                .build()
+                ).build();
+    }
+
+    public static BrinkOrderCancellationPostResponse mockOrderCancellationPostResponse() {
+        return new BrinkOrderCancellationPostResponse(
+                "delivery-id-1",
+                "order-id-1",
+                "order-reference-1",
+                new PaymentProvider("payment-provider-name-1", "payment-provider-id-1"),
+                Optional.of(new ShippingProvider("shipping-provider-name-1", "shipping-provider-id-1")),
+                Optional.of(new PromotionProvider("promotion-provider-name-1", "promotion-provider-id-1")),
+                Optional.of(new GiftCardProvider("gift-card-provider-name-1", "gift-card-provider-id-1")),
+                Optional.of(new GiftCardProductProvider("gift-card-product-provider-name-1", "gift-card-product-provider-id-1")),
+                Optional.of(new VoucherProvider("voucher-provider-name-1", "voucher-provider-id-1")),
+                Optional.of(new BonusProvider("bonus-provider-name-1", "bonus-provider-id-1")),
+                new Reason("reason-id-1", "generic reason cause"),
+                List.of(
+                        new GiftCard(
+                                "gift-card-id-1",
+                                0L,
+                                "SEK",
+                                "status string",
+                                "reservation-id-1",
+                                "transaction-id-1"
+                        )
+                ),
+                List.of(
+                        new com.brinkcommerce.api.management.order.delivery.model.response.GiftCardProduct(
+                                "gift-card-product-id-1",
+                                "SEK",
+                                0L,
+                                "status string",
+                                "transaction-id-1",
+                                "failed reason string",
+                                "create-id-1"
+                        )
+                ),
+                new CancelledPayment(
+                        "cancelled-payment-reference-1"
+                ),
+                Optional.of(new Bonus(
+                        "bonus-id-1",
+                        "reservation-id-1",
+                        100L,
+                        "SEK"
+                )),
+                Instant.now(),
+                Instant.now(),
+                Optional.of(Instant.now()),
+                Optional.of(Instant.now()),
+                Optional.of(1L),
+                Optional.of(Instant.now()),
+                Optional.of(Instant.now()),
+                1L
+        );
+    }
 
     public static BrinkDeliveryPostRequest mockOrderDeliveryPostRequest() {
         return BrinkDeliveryPostRequest.builder()
@@ -105,9 +285,9 @@ public class Mocks {
                                 "gift-card-id-1",
                                 0L,
                                 "SEK",
-                                "unknown string",
-                                "unknown string",
-                                "unknown string"
+                                "status string",
+                                "reservation-id-1",
+                                "transaction-id-1"
                         )
                 ),
                 List.of(
@@ -115,9 +295,9 @@ public class Mocks {
                                 "gift-card-product-id-1",
                                 "SEK",
                                 0L,
-                                "unknown string",
-                                "unknown string",
-                                "unknown string",
+                                "status string",
+                                "transaction-id-1",
+                                "failed reason string",
                                 "create-id-1"
                         )
                 ),
