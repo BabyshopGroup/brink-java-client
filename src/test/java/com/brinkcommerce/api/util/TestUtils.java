@@ -8,6 +8,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -24,7 +25,8 @@ public class TestUtils {
   private static final ObjectMapper objectMapper =
       new ObjectMapper()
           .registerModule(new JavaTimeModule())
-          .enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT)
+              .registerModule(new Jdk8Module())
+              .enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT)
           .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
           .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
           .setSerializationInclusion(JsonInclude.Include.NON_NULL);
@@ -101,6 +103,7 @@ public class TestUtils {
         "http://mockserver.com",
         new ObjectMapper()
             .registerModule(new JavaTimeModule())
+            .registerModule(new Jdk8Module())
             .enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT)
             .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
             .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)

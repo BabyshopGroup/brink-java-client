@@ -33,7 +33,7 @@ import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class BrinkOrderTest {
+public class BrinkDeliveryApiTest {
     private BrinkDeliveryApi sut;
 
     @Mock
@@ -53,7 +53,7 @@ public class BrinkOrderTest {
     }
 
     @Test
-    void whenInit_returnBrinkOrderApi() {
+    void whenInit_returnBrinkDeliveryApi() {
         assertThat(sut).isNotNull();
     }
 
@@ -95,15 +95,14 @@ public class BrinkOrderTest {
 
     @Test
     void whenCreateOnNullArgument_throwsNullPointer() {
-    final BrinkDeliveryPostRequest request = null;
+        final BrinkDeliveryPostRequest request = null;
 
-    assertThatThrownBy(() -> sut.create(request, "order-id-1")).isInstanceOf(NullPointerException.class);
-  }
+        assertThatThrownBy(() -> sut.create(request, "order-id-1")).isInstanceOf(NullPointerException.class);
+    }
 
     @ParameterizedTest()
     @ValueSource(ints = {400, 500})
-    void whenCreate_returnErrorStatusCode(final int statusCode)
-            throws IOException, InterruptedException {
+    void whenCreate_returnErrorStatusCode(final int statusCode) throws IOException, InterruptedException {
         final BrinkDeliveryPostRequest request = mockOrderDeliveryPostRequest();
 
         final BrinkHttpErrorMessage errorMessage = new BrinkHttpErrorMessage("0", "Error");
@@ -117,6 +116,7 @@ public class BrinkOrderTest {
     }
 
     /* --------------- get --------------- */
+
     @Test
     void whenGet_returnBrinkDelivery() throws IOException, InterruptedException {
         final BrinkDeliveryGetRequest request = mockOrderDeliveryGetRequest();
@@ -202,5 +202,4 @@ public class BrinkOrderTest {
 
         assertThatThrownBy(() -> sut.start(request, "delivery-id-1")).isInstanceOf(NullPointerException.class);
     }
-
 }
