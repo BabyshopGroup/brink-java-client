@@ -427,10 +427,10 @@ public class Mocks {
 
     public static BrinkDeliveryStartRequest mockOrderDeliveryStartRequest() {
         return BrinkDeliveryStartRequest.builder()
-                .withBonus(com.brinkcommerce.api.management.order.delivery.model.request.Bonus.builder().withActionType(ActionType.AUTO).build())
-                .withGiftCard(com.brinkcommerce.api.management.order.delivery.model.request.GiftCard.builder().withActionType(ActionType.AUTO).build())
-                .withPayment(com.brinkcommerce.api.management.order.delivery.model.request.Payment.builder().withActionType(ActionType.AUTO).build())
-                .withShipping(com.brinkcommerce.api.management.order.delivery.model.request.Shipping.builder().withActionType(ActionType.AUTO).build())
+                .withShipping(DeliveryActionShippingAuto.builder().build())
+                .withBonus(new DeliveryActionBonusAuto())
+                .withGiftCard(new DeliveryActionGiftCardAuto())
+                .withPayment(new DeliveryActionPaymentAuto())
                 .build();
     }
 
