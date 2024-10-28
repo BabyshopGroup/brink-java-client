@@ -1,10 +1,10 @@
 package com.brinkcommerce.api.management.order.delivery.model.request;
 
 public record BrinkDeliveryStartRequest(
-        Payment payment,
-        Shipping shipping,
-        GiftCard giftCard,
-        Bonus bonus
+        DeliveryActionPayment payment,
+        DeliveryActionShipping shipping,
+        DeliveryActionGiftCard giftCard,
+        DeliveryActionBonus bonus
 ) {
     private BrinkDeliveryStartRequest(final BrinkDeliveryStartRequestBuilder builder) {
         this(
@@ -20,30 +20,30 @@ public record BrinkDeliveryStartRequest(
     }
 
     public static class BrinkDeliveryStartRequestBuilder {
-        private Payment payment;
-        private Shipping shipping;
-        private GiftCard giftCard;
-        private Bonus bonus;
+        private DeliveryActionPayment payment;
+        private DeliveryActionShipping shipping;
+        private DeliveryActionGiftCard giftCard;
+        private DeliveryActionBonus bonus;
 
         public BrinkDeliveryStartRequestBuilder() {
         }
 
-        public BrinkDeliveryStartRequestBuilder withPayment(final Payment payment) {
+        public BrinkDeliveryStartRequestBuilder withPayment(final DeliveryActionPayment payment) {
             this.payment = payment;
             return this;
         }
 
-        public BrinkDeliveryStartRequestBuilder withShipping(final Shipping shipping) {
+        public BrinkDeliveryStartRequestBuilder withShipping(final DeliveryActionShipping shipping) {
             this.shipping = shipping;
             return this;
         }
 
-        public BrinkDeliveryStartRequestBuilder withGiftCard(final GiftCard giftCard) {
+        public BrinkDeliveryStartRequestBuilder withGiftCard(final DeliveryActionGiftCard giftCard) {
             this.giftCard = giftCard;
             return this;
         }
 
-        public BrinkDeliveryStartRequestBuilder withBonus(final Bonus bonus) {
+        public BrinkDeliveryStartRequestBuilder withBonus(final DeliveryActionBonus bonus) {
             this.bonus = bonus;
             return this;
         }

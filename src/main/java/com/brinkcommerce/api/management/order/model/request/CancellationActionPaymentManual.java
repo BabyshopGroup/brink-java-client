@@ -10,6 +10,10 @@ public record CancellationActionPaymentManual(
     }
 
 
+    public static CancellationActionPaymentManualBuilder builder() {
+        return new CancellationActionPaymentManualBuilder();
+    }
+
     public static final class CancellationActionPaymentManualBuilder {
         private String reference;
 
