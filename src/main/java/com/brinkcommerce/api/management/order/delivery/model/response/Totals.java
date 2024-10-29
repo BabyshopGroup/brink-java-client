@@ -7,4 +7,5 @@ public record Totals(
         Long giftCardTotal,
         Long bonusTotal,
         Long grandTotal
-) {}
+) {
+}

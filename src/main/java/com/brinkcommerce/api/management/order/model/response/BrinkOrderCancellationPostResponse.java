@@ -31,4 +31,5 @@ public record BrinkOrderCancellationPostResponse(
         Optional<Instant> completed,
         Optional<Instant> failed,
         Long revision
-) {}
+) {
+}

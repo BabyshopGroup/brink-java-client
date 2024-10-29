@@ -4,4 +4,5 @@ public record Voucher(
         String voucherId,
         Long amount,
         String currencyCode
-) {}
+) {
+}

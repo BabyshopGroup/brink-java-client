@@ -7,8 +7,8 @@ import com.brinkcommerce.api.management.order.delivery.BrinkOrderException;
 import com.brinkcommerce.api.management.order.model.request.BrinkOrderCancellationPostRequest;
 import com.brinkcommerce.api.management.order.model.request.BrinkOrderReleasePostRequest;
 import com.brinkcommerce.api.management.order.model.request.BrinkOrderStartCancellationPostRequest;
-import com.brinkcommerce.api.management.order.model.response.BrinkOrderReleasePostResponse;
 import com.brinkcommerce.api.management.order.model.response.BrinkOrderCancellationPostResponse;
+import com.brinkcommerce.api.management.order.model.response.BrinkOrderReleasePostResponse;
 import com.brinkcommerce.api.utils.BrinkHttpUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

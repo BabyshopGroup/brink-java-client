@@ -4,7 +4,7 @@ import com.brinkcommerce.api.management.order.delivery.model.request.ActionType;
 
 public record CancellationActionPaymentManual(
         String reference
-)  implements CancellationActionPayment {
+) implements CancellationActionPayment {
     public ActionType getActionType() {
         return ActionType.MANUAL;
     }

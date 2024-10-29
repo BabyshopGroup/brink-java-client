@@ -1,10 +1,13 @@
 package com.brinkcommerce.api.management.order.delivery.model.request;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Objects;
 
 public record DeliveryActionPaymentManual(
         String captureReference
 ) implements DeliveryActionPayment {
+    @JsonProperty("actionType")
     public ActionType actionType() {
         return ActionType.MANUAL;
     }

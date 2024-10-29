@@ -8,10 +8,10 @@ public record BrinkDeliveryStartRequest(
 ) {
     private BrinkDeliveryStartRequest(final BrinkDeliveryStartRequestBuilder builder) {
         this(
-            builder.payment,
-            builder.shipping,
-            builder.giftCard,
-            builder.bonus
+                builder.payment,
+                builder.shipping,
+                builder.giftCard,
+                builder.bonus
         );
     }
 

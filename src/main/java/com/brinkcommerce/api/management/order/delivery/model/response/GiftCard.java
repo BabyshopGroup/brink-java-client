@@ -8,4 +8,5 @@ public record GiftCard(
         String reservationId,
         String transactionId
 
-) {}
+) {
+}

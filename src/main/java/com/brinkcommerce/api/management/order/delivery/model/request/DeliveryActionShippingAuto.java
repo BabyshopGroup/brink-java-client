@@ -1,10 +1,13 @@
 package com.brinkcommerce.api.management.order.delivery.model.request;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Objects;
 
 public record DeliveryActionShippingAuto(
         String trackingReference
 ) implements DeliveryActionShipping {
+    @JsonProperty("actionType")
     public ActionType actionType() {
         return ActionType.AUTO;
     }

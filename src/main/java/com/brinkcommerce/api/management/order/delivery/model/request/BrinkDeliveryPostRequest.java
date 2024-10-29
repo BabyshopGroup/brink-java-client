@@ -3,18 +3,18 @@ package com.brinkcommerce.api.management.order.delivery.model.request;
 import java.util.List;
 
 public record BrinkDeliveryPostRequest(
-    List<OrderLine> orderLines,
-    List<String> shippingFees,
-    List<Gift> gifts,
-    List<GiftCardProduct> giftCardProducts
+        List<OrderLine> orderLines,
+        List<String> shippingFees,
+        List<Gift> gifts,
+        List<GiftCardProduct> giftCardProducts
 ) {
 
     private BrinkDeliveryPostRequest(final BrinkDeliveryPostRequestBuilder builder) {
         this(
-            builder.orderLines,
-            builder.shippingFees,
-            builder.gifts,
-            builder.giftCardProducts
+                builder.orderLines,
+                builder.shippingFees,
+                builder.gifts,
+                builder.giftCardProducts
         );
     }
 

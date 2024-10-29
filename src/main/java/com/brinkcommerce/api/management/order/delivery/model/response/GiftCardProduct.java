@@ -8,4 +8,5 @@ public record GiftCardProduct(
         String createTransactionId,
         String createFailedReason,
         String createId
-) {}
+) {
+}
