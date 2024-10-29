@@ -1,7 +1,5 @@
 package com.brinkcommerce.api.management.order.delivery.model.response;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
@@ -37,6 +35,7 @@ public record BrinkDeliveryPostResponse(
         Optional<Instant> completed,
         Optional<Instant> failed,
         Long revision
-) {}
+) {
+}
 
 

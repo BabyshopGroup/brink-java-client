@@ -1,11 +1,5 @@
 package com.brinkcommerce.api.management.order.delivery.model.response;
 
-import com.brinkcommerce.api.converter.OptionalInstantDeserializer;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
@@ -40,4 +34,5 @@ public record BrinkDeliveryGetResponse(
         Optional<Instant> completed,
         Optional<Instant> failed,
         Long revision
-) {}
+) {
+}

@@ -5,4 +5,5 @@ public record Bonus(
         String reservationId,
         Long amount,
         String currencyCode
-) {}
+) {
+}

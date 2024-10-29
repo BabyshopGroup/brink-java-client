@@ -9,4 +9,5 @@ public record ShippingFee(
         Long totalAmount,
         Long totalTaxAmount,
         Long totalDiscountAmount
-) {}
+) {
+}

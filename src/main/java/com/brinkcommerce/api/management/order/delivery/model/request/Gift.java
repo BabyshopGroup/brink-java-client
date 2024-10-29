@@ -7,8 +7,8 @@ public record Gift(
 
     private Gift(final RequestGiftBuilder builder) {
         this(
-            builder.giftId,
-            builder.quantity
+                builder.giftId,
+                builder.quantity
         );
     }
 

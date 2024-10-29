@@ -1,10 +1,10 @@
 package com.brinkcommerce.api.management.order.delivery.model.request;
 
 public record DeliveryActionShippingManual(
-    String trackingReference,
-    String trackingUrl,
-    String shippingMethod,
-    String shippingCompany
+        String trackingReference,
+        String trackingUrl,
+        String shippingMethod,
+        String shippingCompany
 ) implements DeliveryActionShipping {
     public ActionType getActionType() {
         return ActionType.MANUAL;

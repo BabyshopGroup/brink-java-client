@@ -135,7 +135,7 @@ public class BrinkDeliveryApi {
     public void start(
             final BrinkDeliveryStartRequest request,
             final String deliveryId
-            ) {
+    ) {
         Objects.requireNonNull(request, "com.brinkcommerce.api.Brink Brink delivery start request cannot be null");
 
         final String uri = new StringBuilder()

@@ -5,4 +5,5 @@ public record Tracking(
         String url,
         String shippingMethod,
         String shippingCompany
-) {}
+) {
+}
