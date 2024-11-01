@@ -17,7 +17,7 @@ public record DeliveryActionBonusManual(
     public static class DeliveryActionBonusManualBuilder {
         private String transactionId;
 
-        public DeliveryActionBonusManualBuilder transactionId(String transactionId) {
+        public DeliveryActionBonusManualBuilder withTransactionId(String transactionId) {
             this.transactionId = transactionId;
             return this;
         }

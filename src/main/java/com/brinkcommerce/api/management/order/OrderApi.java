@@ -7,6 +7,7 @@ import com.brinkcommerce.api.management.order.delivery.BrinkOrderException;
 import com.brinkcommerce.api.management.order.model.request.BrinkOrderCancellationPostRequest;
 import com.brinkcommerce.api.management.order.model.request.BrinkOrderReleasePostRequest;
 import com.brinkcommerce.api.management.order.model.request.BrinkOrderStartCancellationPostRequest;
+import com.brinkcommerce.api.management.order.model.request.BrinkStartReleaseRequest;
 import com.brinkcommerce.api.management.order.model.response.BrinkOrderCancellationPostResponse;
 import com.brinkcommerce.api.management.order.model.response.BrinkOrderReleasePostResponse;
 import com.brinkcommerce.api.utils.BrinkHttpUtil;
@@ -26,6 +27,7 @@ public class OrderApi {
     private static final String BASE_PATH = "order";
     private static final String ORDERS_PATH = "orders";
     private static final String CANCELLATIONS_PATH = "cancellations";
+    private static final String RELEASES_PATH = "releases";
 
     private final ObjectMapper mapper;
     private final HttpClient httpClient;
@@ -33,6 +35,7 @@ public class OrderApi {
     private final URI orderPath;
     private final BrinkHttpUtil brinkHttpUtil;
     private final URI cancellationPath;
+    private final URI releasePath;
 
     public OrderApi(
             final ManagementConfiguration config,
@@ -44,6 +47,7 @@ public class OrderApi {
         this.httpClient = Objects.requireNonNull(config.httpClient(), "HttpClient cannot be null.");
         this.orderPath = URI.create(String.format("%s/%s/%s", config.host(), BASE_PATH, ORDERS_PATH));
         this.cancellationPath = URI.create(String.format("%s/%s/%s", config.host(), BASE_PATH, CANCELLATIONS_PATH));
+        this.releasePath = URI.create(String.format("%s/%s/%s", config.host(), BASE_PATH, RELEASES_PATH));
         this.authenticationHandler = authenticationHandler;
         this.brinkHttpUtil = BrinkHttpUtil.create(this.mapper);
     }
@@ -174,7 +178,46 @@ public class OrderApi {
                     e,
                     null);
         }
+    }
 
+    public void startRelease(final BrinkStartReleaseRequest request, final String releaseId) {
+        final String uri = new StringBuilder()
+                .append(this.releasePath)
+                .append("/")
+                .append(releaseId)
+                .append("/start")
+                .toString();
+
+        try {
+            final HttpRequest httpRequest = httpRequestBuilderWithAuthentication(
+                    URI.create(uri),
+                    this.authenticationHandler.getToken(),
+                    this.authenticationHandler.getApiKey())
+                    .POST(HttpRequest.BodyPublishers.ofString(this.mapper.writeValueAsString(request)))
+                    .header(ACCEPT, APPLICATION_JSON)
+                    .header(CONTENT_TYPE, APPLICATION_JSON)
+                    .build();
+
+            final HttpResponse<String> response = makeRequest(httpRequest);
+            this.brinkHttpUtil.handleResponse(response, Void.class);
+        } catch (final InterruptedException ie) {
+            Thread.currentThread().interrupt();
+            throw new BrinkOrderException(
+                    String.format("Failed to start release for release id %s", releaseId),
+                    ie,
+                    null);
+        } catch (final BrinkIntegrationException e) {
+            throw new BrinkOrderException(
+                    String.format("Failed to start release for release id %s", releaseId),
+                    e,
+                    e.brinkHttpCode(),
+                    e.requestId());
+        } catch (final Exception e) {
+            throw new BrinkOrderException(
+                    String.format("Failed to start release for release id %s", releaseId),
+                    e,
+                    null);
+        }
     }
 
     private HttpResponse<String> makeRequest(final HttpRequest request) throws IOException, InterruptedException {

@@ -64,6 +64,15 @@ public class Mocks {
                 ).build();
     }
 
+    public static BrinkStartReleaseRequest mockOrderStartReleasePostRequest() {
+        return BrinkStartReleaseRequest.builder()
+                .withPayment(new ReleaseActionPaymentAuto())
+                .withBonus(new ReleaseActionBonusAuto())
+                .withGiftCard(new ReleaseActionGiftCardAuto())
+                .withGiftCardProduct(new ReleaseActionGiftCardProductAuto())
+                .build();
+    }
+
     public static BrinkOrderReleasePostResponse mockOrderReleasePostResponse() {
         return new BrinkOrderReleasePostResponse(
                 "delivery-id-1",

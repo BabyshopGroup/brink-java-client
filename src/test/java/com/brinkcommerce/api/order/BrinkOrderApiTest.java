@@ -9,6 +9,7 @@ import com.brinkcommerce.api.management.order.delivery.BrinkOrderException;
 import com.brinkcommerce.api.management.order.model.request.BrinkOrderCancellationPostRequest;
 import com.brinkcommerce.api.management.order.model.request.BrinkOrderReleasePostRequest;
 import com.brinkcommerce.api.management.order.model.request.BrinkOrderStartCancellationPostRequest;
+import com.brinkcommerce.api.management.order.model.request.BrinkStartReleaseRequest;
 import com.brinkcommerce.api.management.order.model.response.BrinkOrderCancellationPostResponse;
 import com.brinkcommerce.api.management.order.model.response.BrinkOrderReleasePostResponse;
 import org.junit.jupiter.api.BeforeEach;
@@ -172,6 +173,35 @@ public class BrinkOrderApiTest {
                 .thenThrow(RuntimeException.class);
 
         assertThatThrownBy(() -> sut.release(request, "order-id-1")).isInstanceOf(BrinkOrderException.class);
+    }
+
+    /* --------------------- start release --------------------- */
+
+    @Test
+    void whenStartRelease_returnBrinkOrderReleasePostResponse() throws IOException, InterruptedException {
+        final BrinkStartReleaseRequest response = mockOrderStartReleasePostRequest();
+
+        final HttpResponse<String> httpResponse = mock(HttpResponse.class);
+
+        when(httpResponse.statusCode()).thenReturn(202);
+        when(httpClient.send(any(HttpRequest.class), any(HttpResponse.BodyHandler.class))).thenReturn(httpResponse);
+
+        sut.startRelease(response,"release-id-1");
+
+        verify(httpClient)
+                .send(
+                        argThat(x -> {
+                            assertThat(x.uri().toString())
+                                    .isEqualTo("http://mockserver.com/order/releases/release-id-1/start");
+                            return true;
+                        }),
+                        argThat(
+                                x -> {
+                                    assertThat(x).isNotNull();
+                                    return true;
+                                }
+                        )
+                );
     }
 
     /* --------------------- start cancel --------------------- */
